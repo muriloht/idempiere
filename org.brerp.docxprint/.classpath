@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src/"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-ooxml-schemas.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.apache.poi.xwpf.converter.core.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/org.apache.poi.xwpf.converter.pdf.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-codec.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/commons-collections4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/curvesapi.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/fr.opensagres.xdocreport.itext.extension.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/itext.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ooxml-schemas.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi-scratchpad.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/poi.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/xmlbeans.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
