@@ -31,7 +31,7 @@ import org.compiere.util.DisplayType;
 
 /**
  *	System Configuration
- *	
+ *
  *  @author Armen Rizal
  *  @version $Id: MSysConfig.java,v 1.5 2005/11/28 11:56:45 armen Exp $
  *  Contributor: Carlos Ruiz - globalqss - [ 1800371 ] System Configurator Enhancements
@@ -54,7 +54,7 @@ public class MSysConfig extends X_AD_SysConfig
     public static final String ALogin_ShowOneRole = "ALogin_ShowOneRole"; // deprecated
     public static final String APPLICATION_DATABASE_VERSION = "APPLICATION_DATABASE_VERSION";
     public static final String APPLICATION_DATABASE_VERSION_SHOWN = "APPLICATION_DATABASE_VERSION_SHOWN";
-    public static final String APPLICATION_HOST_SHOWN = "APPLICATION_HOST_SHOWN";   
+    public static final String APPLICATION_HOST_SHOWN = "APPLICATION_HOST_SHOWN";
     public static final String APPLICATION_IMPLEMENTATION_VENDOR = "APPLICATION_IMPLEMENTATION_VENDOR";
     public static final String APPLICATION_IMPLEMENTATION_VENDOR_SHOWN = "APPLICATION_IMPLEMENTATION_VENDOR_SHOWN";
     public static final String APPLICATION_JVM_VERSION_SHOWN = "APPLICATION_JVM_VERSION_SHOWN";
@@ -197,7 +197,7 @@ public class MSysConfig extends X_AD_SysConfig
     public static final String ZK_THEME_USE_FONT_ICON_FOR_IMAGE = "ZK_THEME_USE_FONT_ICON_FOR_IMAGE";
     public static final String ZK_THEME = "ZK_THEME";
     public static final String ZOOM_ACROSS_QUERY_TIMEOUT = "ZOOM_ACROSS_QUERY_TIMEOUT";
-
+	public static final String EXPORT_DOCX_PDF = "EXPORT_DOCX_PDF";
 	/**
 	 * 	Standard Constructor
 	 *	@param ctx context
@@ -210,7 +210,7 @@ public class MSysConfig extends X_AD_SysConfig
 		{
 		//	setName (null);
 		//  setValue (null);
-		}	
+		}
 	}	//	MSysConfig
 
 	/**
@@ -222,12 +222,12 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		super(ctx, rs, trxName);
 	}	//	MSysConfig
-	
+
 	/**	Static Logger	*/
 	private static CLogger	s_log	= CLogger.getCLogger (MSysConfig.class);
 	/** Cache			*/
 	private static CCache<String, String> s_cache = new CCache<String, String>(Table_Name, 40, 0, true);
-	
+
 	/**
 	 * Get system configuration property of type string
 	 * @param Name
@@ -238,7 +238,7 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		return getValue(Name, defaultValue, 0, 0);
 	}
-	
+
 	/**
 	 * Get system configuration property of type string
 	 * @param Name
@@ -248,7 +248,7 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		return getValue(Name, null);
 	}
-	
+
 	/**
 	 * Get system configuration property of type int
 	 * @param Name
@@ -259,8 +259,8 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		String s = getValue(Name);
 		if (s == null)
-			return defaultValue; 
-		
+			return defaultValue;
+
 		if (s.length() == 0)
 			return defaultValue;
 		//
@@ -333,7 +333,7 @@ public class MSysConfig extends X_AD_SysConfig
 		String s = getValue(Name);
 		if (s == null || s.length() == 0)
 			return defaultValue;
-		
+
 		if ("Y".equalsIgnoreCase(s))
 			return true;
 		else if ("N".equalsIgnoreCase(s))
@@ -341,7 +341,7 @@ public class MSysConfig extends X_AD_SysConfig
 		else
 			return Boolean.valueOf(s).booleanValue();
 	}
-	
+
 	/**
 	 * Get client configuration property of type string
 	 * @param Name
@@ -353,7 +353,7 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		return getValue(Name, defaultValue, AD_Client_ID, 0);
 	}
-	
+
 	/**
 	 * Get system configuration property of type string
 	 * @param Name
@@ -364,7 +364,7 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		return (getValue(Name, null, AD_Client_ID));
 	}
-	
+
 	/**
 	 * Get system configuration property of type int
 	 * @param Name
@@ -376,8 +376,8 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		String s = getValue(Name, AD_Client_ID);
 		if (s == null)
-			return defaultValue; 
-		
+			return defaultValue;
+
 		if (s.length() == 0)
 			return defaultValue;
 		//
@@ -453,7 +453,7 @@ public class MSysConfig extends X_AD_SysConfig
 		String s = getValue(Name, AD_Client_ID);
 		if (s == null || s.length() == 0)
 			return defaultValue;
-		
+
 		if ("Y".equalsIgnoreCase(s))
 			return true;
 		else if ("N".equalsIgnoreCase(s))
@@ -520,7 +520,7 @@ public class MSysConfig extends X_AD_SysConfig
 			return defaultValue;
 		}
 	}
-	
+
 	/**
 	 * Get system configuration property of type string
 	 * @param Name
@@ -532,7 +532,7 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		return getValue(Name, null, AD_Client_ID, AD_Org_ID);
 	}
-	
+
 	/**
 	 * Get system configuration property of type int
 	 * @param Name
@@ -545,8 +545,8 @@ public class MSysConfig extends X_AD_SysConfig
 	{
 		String s = getValue(Name, AD_Client_ID, AD_Org_ID);
 		if (s == null)
-			return defaultValue; 
-		
+			return defaultValue;
+
 		if (s.length() == 0)
 			return defaultValue;
 		//
@@ -625,7 +625,7 @@ public class MSysConfig extends X_AD_SysConfig
 		String s = getValue(Name, AD_Client_ID, AD_Org_ID);
 		if (s == null || s.length() == 0)
 			return defaultValue;
-		
+
 		if ("Y".equalsIgnoreCase(s))
 			return true;
 		else if ("N".equalsIgnoreCase(s))
@@ -713,8 +713,8 @@ public class MSysConfig extends X_AD_SysConfig
 			}
 		}
 		return dt;
-	}	
-	
+	}
+
 	/**************************************************************************
 	 * 	Before Save
 	 *	@param newRecord
@@ -723,9 +723,9 @@ public class MSysConfig extends X_AD_SysConfig
 	protected boolean beforeSave (boolean newRecord)
 	{
 		if (log.isLoggable(Level.FINE)) log.fine("New=" + newRecord);
-		
+
 		if (getAD_Client_ID() != 0 || getAD_Org_ID() != 0) {
-			
+
 			// Get the configuration level from the System Record
 			String configLevel = null;
 			String sql = "SELECT ConfigurationLevel FROM AD_SysConfig WHERE Name=? AND AD_Client_ID = 0 AND AD_Org_ID = 0";
@@ -748,7 +748,7 @@ public class MSysConfig extends X_AD_SysConfig
 				DB.close(rs, pstmt);
 				rs = null; pstmt = null;
 			}
-			
+
 			if (configLevel == null) {
 				// not found for system
 				// if saving an org parameter - look config in client
@@ -775,14 +775,14 @@ public class MSysConfig extends X_AD_SysConfig
 					}
 				}
 			}
-			
+
 			if (configLevel != null) {
-				
+
 				setConfigurationLevel(configLevel);
-				
+
 				// Disallow saving org parameter if the system parameter is marked as 'S' or 'C'
-				if (getAD_Org_ID() != 0 && 
-						(configLevel.equals(MSysConfig.CONFIGURATIONLEVEL_System) || 
+				if (getAD_Org_ID() != 0 &&
+						(configLevel.equals(MSysConfig.CONFIGURATIONLEVEL_System) ||
 						 configLevel.equals(MSysConfig.CONFIGURATIONLEVEL_Client))) {
 					log.saveError( "Can't Save Org Level", "This is a system or client parameter, you can't save it as organization parameter" );
 					return false;
@@ -795,17 +795,17 @@ public class MSysConfig extends X_AD_SysConfig
 				}
 
 			} else {
-				
+
 				// fix possible wrong config level
 				if (getAD_Org_ID() != 0)
 					setConfigurationLevel(CONFIGURATIONLEVEL_Organization);
 				else if (getAD_Client_ID() != 0 && getConfigurationLevel().equals(MSysConfig.CONFIGURATIONLEVEL_System))
 					setConfigurationLevel(CONFIGURATIONLEVEL_Client);
-				
+
 			}
 
 		}
-		
+
 		return true;
 	}	//	beforeSave
 

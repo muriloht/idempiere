@@ -353,6 +353,15 @@ public interface I_AD_PrintFormat
 	  */
 	public boolean isTableBased();
 
+    /** Column name isTemplateDOCX */
+    public static final String COLUMNNAME_isTemplateDOCX = "isTemplateDOCX";
+
+	/** Set Template DOCX	  */
+	public void setisTemplateDOCX (boolean isTemplateDOCX);
+
+	/** Get Template DOCX	  */
+	public boolean isTemplateDOCX();
+
     /** Column name JasperProcess_ID */
     public static final String COLUMNNAME_JasperProcess_ID = "JasperProcess_ID";
 

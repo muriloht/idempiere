@@ -28,12 +28,12 @@ import org.adempiere.webui.apps.WProcessCtl;
 import org.adempiere.webui.component.Checkbox;
 import org.adempiere.webui.component.Column;
 import org.adempiere.webui.component.Columns;
+import org.adempiere.webui.component.ComboItem;
+import org.adempiere.webui.component.Combobox;
 import org.adempiere.webui.component.ConfirmPanel;
 import org.adempiere.webui.component.Grid;
 import org.adempiere.webui.component.GridFactory;
 import org.adempiere.webui.component.Label;
-import org.adempiere.webui.component.ListItem;
-import org.adempiere.webui.component.Listbox;
 import org.adempiere.webui.component.Panel;
 import org.adempiere.webui.component.Row;
 import org.adempiere.webui.component.Rows;
@@ -43,6 +43,7 @@ import org.adempiere.webui.window.FDialog;
 import org.compiere.model.GridTab;
 import org.compiere.model.MQuery;
 import org.compiere.model.MRole;
+import org.compiere.model.MSysConfig;
 import org.compiere.model.PrintInfo;
 import org.compiere.print.MPrintFormat;
 import org.compiere.print.ReportCtl;
@@ -58,6 +59,7 @@ import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Space;
 import org.zkoss.zul.Tabpanel;
@@ -75,12 +77,13 @@ public class ReportAction implements EventListener<Event>
 	
 	private Window winReport = null;
 	private ConfirmPanel confirmPanel = new ConfirmPanel(true);
-	private Listbox cboPrintFormat = new Listbox();
-	private Listbox cboExportType = new Listbox();
+	private Combobox cboPrintFormat = new Combobox();
+	private Combobox cboExportType = new Combobox();
 	private Checkbox chkCurrentRowOnly = new Checkbox();
 	private Checkbox chkExport = new Checkbox();
 	private Checkbox chkAllColumns = new Checkbox();
 	
+	private Boolean isTemplateDOCX = false;
 	private List<KeyNamePair>	printFormatList = new ArrayList<KeyNamePair>();
 
 	public ReportAction(AbstractADWindowContent panel)
@@ -102,29 +105,21 @@ public class ReportAction implements EventListener<Event>
 			winReport.setStyle("position:absolute");
 			winReport.addEventListener("onValidate", this);
 			
-			cboPrintFormat.setMold("select");
+			cboPrintFormat.setMold("default");
 			cboPrintFormat.getItems().clear();
 			for (KeyNamePair printFormat : printFormatList)
 				cboPrintFormat.appendItem(printFormat.getName(), printFormat.getKey());
-			if (cboPrintFormat.getItemCount() > 0)
+ 			if (cboPrintFormat.getItemCount() > 0)
+			{
 				cboPrintFormat.setSelectedIndex(0);
-			
-			cboExportType.setMold("select");
-			cboExportType.getItems().clear();			
-			cboExportType.appendItem("ps" + " - " + Msg.getMsg(Env.getCtx(), "FilePS"), "ps");
-			cboExportType.appendItem("xml" + " - " + Msg.getMsg(Env.getCtx(), "FileXML"), "xml");
-			cboExportType.appendItem("pdf" + " - " + Msg.getMsg(Env.getCtx(), "FilePDF"), "pdf");
-			cboExportType.appendItem("html" + " - " + Msg.getMsg(Env.getCtx(), "FileHTML"), "html");
-			cboExportType.appendItem("txt" + " - " + Msg.getMsg(Env.getCtx(), "FileTXT"), "txt");
-			cboExportType.appendItem("ssv" + " - " + Msg.getMsg(Env.getCtx(), "FileSSV"), "ssv");
-			cboExportType.appendItem("csv" + " - " + Msg.getMsg(Env.getCtx(), "FileCSV"), "csv");
-			cboExportType.appendItem("xlsx" + " - " + Msg.getMsg(Env.getCtx(), "FileXLSX"), "xlsx");
-			ListItem li = cboExportType.appendItem("xls" + " - " + Msg.getMsg(Env.getCtx(), "FileXLS"), "xls");
-			cboExportType.setSelectedItem(li);
-			cboExportType.setVisible(false);
-			
+				MPrintFormat pf = new MPrintFormat(Env.getCtx(), (Integer)cboPrintFormat.getSelectedItem().getValue(), null);
+				isTemplateDOCX = pf.isTemplateDOCX();
+			}
+
+			refreshExportItems();			
 			chkCurrentRowOnly.setLabel(Msg.getMsg(Env.getCtx(), "CurrentRowOnly"));
-			chkCurrentRowOnly.setSelected(false);
+			chkCurrentRowOnly.setSelected(isTemplateDOCX);
+			chkCurrentRowOnly.setDisabled(isTemplateDOCX);
 			
 			if( isCanExport )
 			{
@@ -134,7 +129,7 @@ public class ReportAction implements EventListener<Event>
 			
 			chkAllColumns.setLabel(Msg.getMsg(Env.getCtx(), "AllColumns"));
 			chkAllColumns.setSelected(false);
-			li = cboPrintFormat.getSelectedItem();
+			ComboItem li = (ComboItem) cboPrintFormat.getSelectedItem();
 			if (li != null && li.getValue() != null)
 			{
 				int AD_PrintFormat_ID = Integer.valueOf(li.getValue().toString());
@@ -147,10 +142,10 @@ public class ReportAction implements EventListener<Event>
 			winReport.setSclass("toolbar-popup-window");
 			vb.setSclass("toolbar-popup-window-cnt");
 			vb.setAlign("stretch");
-			
+
 			Grid grid = GridFactory.newGridLayout();
 			vb.appendChild(grid);
-	        
+
 	        Columns columns = new Columns();
 	        Column column = new Column();
 	        ZKUpdateUtil.setHflex(column, "min");
@@ -159,17 +154,17 @@ public class ReportAction implements EventListener<Event>
 	        ZKUpdateUtil.setHflex(column, "1");
 	        columns.appendChild(column);
 	        grid.appendChild(columns);
-	        
+
 	        Rows rows = new Rows();
 			grid.appendChild(rows);
-			
+
 			Row row = new Row();
 			rows.appendChild(row);
 			row.appendChild(new Label(Msg.translate(Env.getCtx(), "AD_PrintFormat_ID")));
 			row.appendChild(cboPrintFormat);
 			ZKUpdateUtil.setHflex(cboPrintFormat, "1");
 			cboPrintFormat.addEventListener(Events.ON_SELECT, this);
-			
+
 			row = new Row();
 			rows.appendChild(row);
 			row.appendChild(new Space());
@@ -185,13 +180,13 @@ public class ReportAction implements EventListener<Event>
 				panel.appendChild(cboExportType);
 				ZKUpdateUtil.setHflex(cboExportType, "1");
 				ZKUpdateUtil.setHflex(panel, "1");
-				
+
 				row = new Row();
 				rows.appendChild(row);
 				row.appendChild(new Space());
 				row.appendChild(panel);
 			}
-			
+
 			row = new Row();
 			rows.appendChild(row);
 			row.appendChild(new Space());
@@ -204,7 +199,7 @@ public class ReportAction implements EventListener<Event>
 
 		LayoutUtils.openPopupWindow(panel.getToolbar().getToolbarItem("Report"), winReport, "after_start");
 	}
-	
+
 	@Override
 	public void onEvent(Event event) throws Exception {
 		if(event.getTarget().getId().equals(ConfirmPanel.A_CANCEL))
@@ -216,11 +211,17 @@ public class ReportAction implements EventListener<Event>
 		}
 		else if(event.getTarget() == cboPrintFormat)
 		{
-			ListItem li = cboPrintFormat.getSelectedItem();
+			Comboitem li = cboPrintFormat.getSelectedItem();
 			if (li != null && li.getValue() != null)
 			{
 				int AD_PrintFormat_ID = Integer.valueOf(li.getValue().toString());
 				chkAllColumns.setVisible(AD_PrintFormat_ID == -1);
+				MPrintFormat pf = new MPrintFormat(Env.getCtx(), AD_PrintFormat_ID, null);
+				isTemplateDOCX = pf.isTemplateDOCX();
+				chkCurrentRowOnly.setSelected(isTemplateDOCX);
+				chkCurrentRowOnly.setDisabled(isTemplateDOCX);
+				cboExportType.removeAllItems();
+				refreshExportItems();
 			}
 		}
 		else if(event.getTarget() == chkExport)
@@ -234,19 +235,19 @@ public class ReportAction implements EventListener<Event>
 			}
 		}
 	}
-	
+
 	private void validate()
 	{
-		ListItem li = cboPrintFormat.getSelectedItem();
+		Comboitem li = cboPrintFormat.getSelectedItem();
 		if(li == null || li.getValue() == null)
 		{
 			FDialog.error(0, winReport, "PrintFormatMandatory");
 			return;
 		}
-		
+
 		int AD_PrintFormat_ID = Integer.valueOf(li.getValue().toString());
-		
-		boolean export = chkExport.isChecked();		
+
+		boolean export = chkExport.isChecked();
 		if (export)
 		{
 			li = cboExportType.getSelectedItem();
@@ -255,7 +256,7 @@ public class ReportAction implements EventListener<Event>
 				FDialog.error(0, winReport, "ExportFileTypeMandatory");
 				return;
 			}
-		}		
+		}
 
 		GridTab gridTab = panel.getActiveGridTab();
 
@@ -266,7 +267,7 @@ public class ReportAction implements EventListener<Event>
 			pf = MPrintFormat.createFromGridLayout(Env.getCtx(), gridTab, allColumns);
 		else
 			pf = MPrintFormat.get (Env.getCtx(), AD_PrintFormat_ID, true);
-		
+
 		//	Query
 		boolean currentRowOnly = chkCurrentRowOnly.isChecked();
 		int Record_ID = 0;
@@ -323,24 +324,24 @@ public class ReportAction implements EventListener<Event>
 
 		PrintInfo info = new PrintInfo(pf.getName(), pf.getAD_Table_ID(), Record_ID);
 		info.setDescription(query.getInfo());
-		
+
 		if(pf != null && pf.getJasperProcess_ID() > 0)
-		{			
+		{
 			// It's a report using the JasperReports engine
 			ProcessInfo pi = new ProcessInfo ("", pf.getJasperProcess_ID(), pf.getAD_Table_ID(), Record_ID);
 			pi.setRecord_IDs(RecordIDs);
 			//pi.setIsBatch(true);
-			
+
 			if (export)
 			{
 				li = cboExportType.getSelectedItem();
 				String ext = li.getValue().toString();
-				pi.setExportFileExtension(ext);				
+				pi.setExportFileExtension(ext);
 				pi.setExport(true);
-				
+
 				winReport.onClose();
 				ServerProcessCtl.process(pi, null);
-				
+
 				try
 				{
 					File exportFile = pi.getExportFile();
@@ -364,41 +365,48 @@ public class ReportAction implements EventListener<Event>
 			ReportEngine re = new ReportEngine (Env.getCtx(), pf, query, info);
 			re.setWhereExtended(gridTab.getWhereExtended());
 			re.setWindowNo(gridTab.getWindowNo());
-			
+
 			if (export)
 				export(re);
 			else
-				print(re);	
+				print(re);
 		}
 	}
-	
+
 	private void print(ReportEngine re)
 	{
-		winReport.onClose();		
+		winReport.onClose();
 		ReportCtl.preview(re);
 		Tabpanel tabPanel = (Tabpanel) panel.getComponent().getParent();
 		tabPanel.getLinkedTab().setSelected(true);
 	}
-	
-	private void export(ReportEngine re) 
+
+	private void export(ReportEngine re)
 	{
 		try
 		{
-			ListItem li = cboExportType.getSelectedItem();
+			Comboitem li = cboExportType.getSelectedItem();
 			if(li == null || li.getValue() == null)
 			{
 				FDialog.error(0, winReport, "FileInvalidExtension");
 				return;
 			}
-			
+
 			String ext = li.getValue().toString();
-			
+
 			byte[] data = null;
 			File inputFile = null;
-									
+
 			if (ext.equals("pdf"))
 			{
-				data = re.createPDFData();
+				if(!isTemplateDOCX)
+					data = re.createPDFData();
+				else
+				{
+					inputFile = File.createTempFile("Export", ".pdf");
+					re.createPDF(inputFile);
+			}
+
 			}
 			else if (ext.equals("ps"))
 			{
@@ -446,6 +454,11 @@ public class ReportAction implements EventListener<Event>
 				inputFile = File.createTempFile("Export", ".xlsx");							
 				re.createXLSX(inputFile, re.getPrintFormat().getLanguage());
 			}
+			else if (ext.equals("docx"))
+			{
+				inputFile = File.createTempFile("Export", ".docx");
+				re.createDOCX(inputFile);
+			}
 			else
 			{
 				FDialog.error(0, winReport, "FileInvalidExtension");
@@ -465,12 +478,12 @@ public class ReportAction implements EventListener<Event>
 			log.log(Level.SEVERE, "Failed to export content.", e);
 		}
 	}
-	
+
 	private void getPrintFormats(int AD_Table_ID, int AD_Window_ID)
 	{
 		printFormatList.clear();
-		
-		printFormatList = MPrintFormat.getAccessiblePrintFormats(AD_Table_ID, AD_Window_ID, null, false);		
+
+		printFormatList = MPrintFormat.getAccessiblePrintFormats(AD_Table_ID, AD_Window_ID, null, false);
 
 		int pfAD_Window_ID = MPrintFormat.getZoomWindowID(-1);
 		if (MRole.getDefault().isTableAccess(MPrintFormat.Table_ID, false) && Boolean.TRUE.equals(MRole.getDefault().getWindowAccess(pfAD_Window_ID)))
@@ -479,5 +492,32 @@ public class ReportAction implements EventListener<Event>
 			KeyNamePair pp = new KeyNamePair(-1, sb.toString());
 			printFormatList.add(pp);
 		}
+	}
+
+	private void refreshExportItems() {
+		cboExportType.getItems().clear();
+		ComboItem li = null;
+
+		if(MSysConfig.getBooleanValue(MSysConfig.EXPORT_DOCX_PDF, false, Env.getAD_Client_ID(Env.getCtx())) || !isTemplateDOCX)
+			cboExportType.appendItem("pdf" + " - " + Msg.getMsg(Env.getCtx(), "FilePDF"), "pdf");
+		if(!isTemplateDOCX)
+		{
+			cboExportType.appendItem("ps" + " - " + Msg.getMsg(Env.getCtx(), "FilePS"), "ps");
+			cboExportType.appendItem("xml" + " - " + Msg.getMsg(Env.getCtx(), "FileXML"), "xml");
+			cboExportType.appendItem("html" + " - " + Msg.getMsg(Env.getCtx(), "FileHTML"), "html");
+			cboExportType.appendItem("txt" + " - " + Msg.getMsg(Env.getCtx(), "FileTXT"), "txt");
+			cboExportType.appendItem("ssv" + " - " + Msg.getMsg(Env.getCtx(), "FileSSV"), "ssv");
+			cboExportType.appendItem("csv" + " - " + Msg.getMsg(Env.getCtx(), "FileCSV"), "csv");
+			cboExportType.appendItem("xlsx" + " - " + Msg.getMsg(Env.getCtx(), "FileXLSX"), "xlsx");
+			li = new ComboItem("xls" + " - " + Msg.getMsg(Env.getCtx(), "FileXLS"), "xls");
+		}
+		else
+		{
+			li = new ComboItem("docx" + " - " + Msg.getMsg(Env.getCtx(), "FileDOCX"), "docx");
+		}
+		cboExportType.appendChild(li);
+		cboExportType.setSelectedItem(li);
+		cboExportType.setVisible(false);
+		chkExport.setChecked(false);
 	}
 }

@@ -30,7 +30,7 @@ public class X_AD_PrintFormat extends PO implements I_AD_PrintFormat, I_Persiste
 	/**
 	 *
 	 */
-	private static final long serialVersionUID = 20200413L;
+	private static final long serialVersionUID = 20201009L;
 
     /** Standard Constructor */
     public X_AD_PrintFormat (Properties ctx, int AD_PrintFormat_ID, String trxName)
@@ -54,6 +54,8 @@ public class X_AD_PrintFormat extends PO implements I_AD_PrintFormat, I_Persiste
 // Y
 			setIsTableBased (true);
 // Y
+			setisTemplateDOCX (false);
+// N
 			setName (null);
         } */
     }
@@ -532,6 +534,27 @@ public class X_AD_PrintFormat extends PO implements I_AD_PrintFormat, I_Persiste
 	public boolean isTableBased () 
 	{
 		Object oo = get_Value(COLUMNNAME_IsTableBased);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/** Set Template DOCX.
+		@param isTemplateDOCX Template DOCX	  */
+	public void setisTemplateDOCX (boolean isTemplateDOCX)
+	{
+		set_Value (COLUMNNAME_isTemplateDOCX, Boolean.valueOf(isTemplateDOCX));
+	}
+
+	/** Get Template DOCX.
+		@return Template DOCX	  */
+	public boolean isTemplateDOCX () 
+	{
+		Object oo = get_Value(COLUMNNAME_isTemplateDOCX);
 		if (oo != null) 
 		{
 			 if (oo instanceof Boolean) 

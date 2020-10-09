@@ -127,7 +127,7 @@ import org.zkoss.zul.impl.XulElement;
  *
  * 	@author 	Jorg Janke
  * 	@version 	$Id: Viewer.java,v 1.2 2006/07/30 00:51:28 jjanke Exp $
- * globalqss: integrate phib contribution from 
+ * globalqss: integrate phib contribution from
  *   http://sourceforge.net/tracker/index.php?func=detail&aid=1566335&group_id=176962&atid=879334
  * globalqss: integrate Teo Sarca bug fixing
  * Colin Rooney 2007/03/20 RFE#1670185 & BUG#1684142
@@ -136,12 +136,12 @@ import org.zkoss.zul.impl.XulElement;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 				<li>FR [ 1762466 ] Add "Window" menu to report viewer.
  * 				<li>FR [ 1894640 ] Report Engine: Excel Export support
- * 
+ *
  * @author Low Heng Sin
  */
 public class ZkReportViewer extends Window implements EventListener<Event>, ITabOnCloseHandler {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -424164233048709765L;
 
@@ -158,7 +158,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 	/** Table ID					*/
 	private int					m_AD_Table_ID = 0;
 	private boolean				m_isCanExport;
-	
+
 	private MQuery 		m_ddQ = null;
 	private MQuery 		m_daQ = null;
 	private Menuitem 	m_ddM = null;
@@ -181,10 +181,10 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 	private Label labelDrill = new Label();
 	private Listbox comboDrill = new Listbox();
 	private Listbox previewType = new Listbox();
-	
+
 	private ToolBarButton bRefresh = new ToolBarButton();
 	private Iframe iframe;
-	
+
 	private Window winExportFile = null;
 	private ConfirmPanel confirmPanel = new ConfirmPanel(true);
 	private Listbox cboType = new Listbox();
@@ -196,25 +196,25 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 	private A reportLink;
 
 	private boolean init;
-	
+
 	private BusyDialog progressWindow;
 	private Mask mask;
 
 	private Future<?> future;
-	
+
 	private final static String ON_RENDER_REPORT_EVENT = "onRenderReport";
-	
+
 	private Popup toolbarPopup;
-	
+
 	//private static final String REPORT = "org.idempiere.ui.report";
-	
+
 	/**
 	 * 	Static Layout
 	 * 	@throws Exception
 	 */
-	public ZkReportViewer(ReportEngine re, String title) {		
+	public ZkReportViewer(ReportEngine re, String title) {
 		super();
-		
+
 		init = false;
 		m_WindowNo = SessionManager.getAppDesktop().registerWindow(this);
 		setAttribute(IDesktop.WINDOWNO_ATTRIBUTE, m_WindowNo);
@@ -227,10 +227,10 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 			this.onClose();
 		}
 		m_isCanExport = MRole.getDefault().isCanExport(m_AD_Table_ID);
-		
+
 		setTitle(Util.cleanAmp(Msg.getMsg(Env.getCtx(), "Report") + ": " +
 				m_reportEngine.getPrintFormat().get_Translation(MPrintFormat.COLUMNNAME_Name)));
-		
+
 		addEventListener(ON_RENDER_REPORT_EVENT, this);
 	}
 
@@ -273,17 +273,32 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		ZKUpdateUtil.setWidth(toolBar, "100%");
 		
 		previewType.setMold("select");
-		previewType.appendItem("HTML", "HTML");
-		previewType.appendItem("PDF", "PDF");
 		
-		if ( m_isCanExport )
+		//START DEVCOFFEE - #6465
+		if(!m_reportEngine.getPrintFormat().get_ValueAsBoolean("isTemplateDOCX"))
 		{
-			previewType.appendItem("XLS", "XLS");
-			previewType.appendItem("CSV", "CSV");
-			previewType.appendItem("XLSX", "XLSX");
+			previewType.appendItem("HTML", "HTML");
+			previewType.appendItem("PDF", "PDF");
+			
+			if ( m_isCanExport )
+			{
+				previewType.appendItem("XLS", "XLS");
+				previewType.appendItem("CSV", "CSV");
+				previewType.appendItem("XLSX", "XLSX");			
+			}
+		}
+		else
+		{
+			if ( m_isCanExport )
+			{
+				if(MSysConfig.getBooleanValue(MSysConfig.EXPORT_DOCX_PDF, false, Env.getAD_Client_ID(Env.getCtx())))
+					previewType.appendItem("PDF", "PDF");
+
+				previewType.appendItem("DOCX", "DOCX");
+			}
 		}
 		
-		toolBar.appendChild(previewType);		
+		toolBar.appendChild(previewType);
 		previewType.addEventListener(Events.ON_SELECT, this);
 		
 		toolBar.appendChild(new Separator("vertical"));
@@ -292,36 +307,57 @@ public class ZkReportViewer extends Window implements EventListener<Event>, ITab
 		
 		if (m_reportEngine.getReportType() != null)
 		{
-			if (m_reportEngine.getReportType().equals("PDF"))
-				pTypeIndex = 1;
-			else if (m_reportEngine.getReportType().equals("XLS") && m_isCanExport)
-				pTypeIndex = 2;
-			else if (m_reportEngine.getReportType().equals("CSV") && m_isCanExport)
-				pTypeIndex = 3;
-			else if (m_reportEngine.getReportType().equals("XLSX") && m_isCanExport)
-				pTypeIndex = 4;
+			if(!m_reportEngine.getPrintFormat().isTemplateDOCX())
+			{
+				if (m_reportEngine.getReportType().equals("PDF"))
+					pTypeIndex = 1;
+				else if (m_reportEngine.getReportType().equals("XLS") && m_isCanExport)
+					pTypeIndex = 2;
+				else if (m_reportEngine.getReportType().equals("CSV") && m_isCanExport)
+						pTypeIndex = 3;
+				else if (m_reportEngine.getReportType().equals("XLSX") && m_isCanExport)
+					pTypeIndex = 4;
+			} 
+			else
+			{
+				if (m_reportEngine.getReportType().equals("PDF"))
+					pTypeIndex = 0;
+				else if(m_reportEngine.getReportType().equals("DOCX") && m_isCanExport)
+					pTypeIndex = 1;
+			}
 		}
 		else
 		{
-    		//set default type
-    		String type = m_reportEngine.getPrintFormat().isForm()
-    				// a42niem - provide explicit default and check on client/org specifics
-    				? MSysConfig.getValue(MSysConfig.ZK_REPORT_FORM_OUTPUT_TYPE,"PDF",Env.getAD_Client_ID(m_ctx),Env.getAD_Org_ID(m_ctx))
-    				: MSysConfig.getValue(MSysConfig.ZK_REPORT_TABLE_OUTPUT_TYPE,"PDF",Env.getAD_Client_ID(m_ctx),Env.getAD_Org_ID(m_ctx));
-    
-    		if ("HTML".equals(type)) {
-    			pTypeIndex = 0;
-    		} else if ("PDF".equals(type)) {
-    			pTypeIndex = 1;
-    		} else if ("XLS".equals(type) && m_isCanExport) {
-    			pTypeIndex = 2;
-    		} else if ("CSV".equals(type) && m_isCanExport) {
-    			pTypeIndex = 3;
-    		} else if ("XLSX".equals(type) && m_isCanExport) {
-    			pTypeIndex = 4;
+			//set default type
+			String type = m_reportEngine.getPrintFormat().isForm()
+				// a42niem - provide explicit default and check on client/org specifics
+				? MSysConfig.getValue(MSysConfig.ZK_REPORT_FORM_OUTPUT_TYPE,"PDF",Env.getAD_Client_ID(m_ctx),Env.getAD_Org_ID(m_ctx))
+				:  m_reportEngine.getPrintFormat().isTemplateDOCX() ? "DOCX" : MSysConfig.getValue(MSysConfig.ZK_REPORT_TABLE_OUTPUT_TYPE,"PDF",Env.getAD_Client_ID(m_ctx),Env.getAD_Org_ID(m_ctx));
+			if(!m_reportEngine.getPrintFormat().isTemplateDOCX())
+    		{
+				if ("HTML".equals(type)) {
+					pTypeIndex = 0;
+				} else if ("PDF".equals(type)) {
+	    			pTypeIndex = 1;
+	    		} else if ("XLS".equals(type) && m_isCanExport && !m_reportEngine.getPrintFormat().get_ValueAsBoolean("isTemplateDOCX")) {
+	    			pTypeIndex = 2;
+	    		} else if ("CSV".equals(type) && m_isCanExport) {
+	    			pTypeIndex = 3;
+	    		} else if ("XLSX".equals(type) && m_isCanExport) {
+	    			pTypeIndex = 4;
+	    		}
+			}
+    		else
+    		{
+    			if ("PDF".equals(type)) {
+    				pTypeIndex = 0;
+    			}
+    			else if ("DOCX".equals(type) && m_isCanExport) {
+    				pTypeIndex = MSysConfig.getBooleanValue(MSysConfig.EXPORT_DOCX_PDF, false, Env.getAD_Client_ID(Env.getCtx())) ? 1 : 0;
+    			}
     		}
 		}
-		
+
 		previewType.setSelectedIndex(pTypeIndex);
 		
 		Vlayout toolbarPopupLayout = null;
