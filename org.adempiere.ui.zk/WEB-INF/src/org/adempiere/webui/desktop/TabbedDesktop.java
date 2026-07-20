@@ -113,6 +113,38 @@ public abstract class TabbedDesktop extends AbstractDesktop {
 	}
 
 	/**
+	 * Focus an already-open tab of {@code formId} (and post {@link IDesktop#ON_DESKTOP_REFOCUS_EVENT}
+	 * to it) or open a new one. See {@link IDesktop#openOrFocusForm(int)}.
+	 * @param formId AD_Form_ID
+	 * @return ADForm
+	 */
+	@Override
+	public ADForm openOrFocusForm(int formId) {
+		Tabbox tabbox = windowContainer.getComponent();
+		Tabpanels panels = tabbox.getTabpanels();
+		for (Object child : panels.getChildren())
+		{
+			Tabpanel panel = (Tabpanel) child;
+			Component component = panel.getFirstChild();
+			if (component instanceof ADForm)
+			{
+				Object att = component.getAttribute(ADForm.AD_FORM_ID_ATTRIBUTE);
+				if (att instanceof Integer && ((Integer)att).intValue() == formId)
+				{
+					Tab tab = panel.getLinkedTab();
+					if (tab != null)
+						windowContainer.setSelectedTab(tab);
+					((ADForm)component).focus();
+					// queued (not sent) so it runs after the current handler, form fully attached
+					Events.postEvent(new Event(IDesktop.ON_DESKTOP_REFOCUS_EVENT, component, Integer.valueOf(formId)));
+					return (ADForm) component;
+				}
+			}
+		}
+		return openForm(formId);
+	}
+
+	/**
 	 * @param infoId
 	 */
 	@Override

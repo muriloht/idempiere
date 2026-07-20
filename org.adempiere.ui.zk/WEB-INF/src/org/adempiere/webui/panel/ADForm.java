@@ -61,6 +61,9 @@ public abstract class ADForm extends Window implements EventListener<Event>, IHe
         logger = CLogger.getCLogger(ADForm.class);
     }
 
+    /** Component attribute carrying AD_Form_ID, used by {@link org.adempiere.webui.desktop.IDesktop#openOrFocusForm(int)} matching. */
+    public static final String AD_FORM_ID_ATTRIBUTE = "ADForm.AD_Form_ID";
+
     /** AD_Form_ID */
     private int m_adFormId;
     /** window number of desktop tab */
@@ -233,6 +236,7 @@ public abstract class ADForm extends Window implements EventListener<Event>, IHe
         		Env.setContext(Env.getCtx(), form.getWindowNo(), "IsSOTrx", isSOTrx);
 				form.init(adFormID, name);
 		    	form.setAttribute(IDesktop.WINDOWNO_ATTRIBUTE, form.getWindowNo());	// for closing the window with shortcut
+		    	form.setAttribute(ADForm.AD_FORM_ID_ATTRIBUTE, Integer.valueOf(adFormID));	// for openOrFocusForm matching
 		    	SessionManager.getSessionApplication().getKeylistener().addEventListener(Events.ON_CTRL_KEY, form);
 		    	form.addEventListener(IDesktop.ON_CLOSE_WINDOW_SHORTCUT_EVENT, form);
 				return form;

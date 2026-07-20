@@ -40,6 +40,9 @@ public interface IDesktop extends UIPart {
 	public static final String ON_ACTIVITIES_CHANGED_EVENT = "onActivitiesChanged";
 	/** Event when closing window/tab with ESC shortcut key */
     public static final String ON_CLOSE_WINDOW_SHORTCUT_EVENT = "onCloseWindowShortcut";
+    /** Event posted to an already-open form's root component when {@link #openOrFocusForm(int)}
+     *  re-targets it instead of creating a new tab. Event data = Integer AD_Form_ID. */
+    public static final String ON_DESKTOP_REFOCUS_EVENT = "onDesktopRefocus";
 
 	/**
 	 * Get client (browser) info
@@ -162,6 +165,21 @@ public interface IDesktop extends UIPart {
      * @return ADWindow
      */
 	public ADForm openForm(int formId);
+
+	/**
+     * Open AD form in desktop, OR if an instance of the same AD_Form_ID is already open
+     * as a desktop tab, focus (re-select) it and post {@link #ON_DESKTOP_REFOCUS_EVENT} to
+     * its root component so it can re-read context and re-render. The default implementation
+     * performs NO deduplication (delegates to {@link #openForm(int)}); {@code TabbedDesktop}
+     * overrides it with the real focus-or-open behavior.
+     * <p>Callers must set any relevant global context (e.g. the record id the form reads on
+     * load) BEFORE calling this, since both the fresh-open and the re-focus paths read it.
+     * @param formId AD_Form_ID
+     * @return the focused or newly created ADForm
+     */
+	public default ADForm openOrFocusForm(int formId) {
+		return openForm(formId);
+	}
 	
 	/**
      * Open info window in desktop
