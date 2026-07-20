@@ -73,6 +73,16 @@ public abstract class TabbedDesktop extends AbstractDesktop {
      */
 	@Override
 	public ProcessDialog openProcessDialog(int processId, boolean soTrx) {
+		// Special Form dispatch (mirrors AbstractADWindowContent.executeButtonProcess0):
+		// menu items with Action='P' reach the process dialog here without consulting
+		// AD_Process.AD_Form_ID; when the binding is set, open the form instead so menu,
+		// window button and direct WProcessCtl callers behave consistently.
+		MProcess pr = MProcess.get(Env.getCtx(), processId);
+		if (pr != null && pr.getAD_Form_ID() > 0) {
+			openForm(pr.getAD_Form_ID());
+			return null;
+		}
+
 		ProcessDialog pd = new ProcessDialog (processId, soTrx, getPredefinedContextVariables());
 
 		if (pd.isValid()) {

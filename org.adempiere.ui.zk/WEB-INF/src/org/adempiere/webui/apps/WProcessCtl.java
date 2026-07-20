@@ -31,6 +31,7 @@ import org.adempiere.webui.session.SessionManager;
 import org.compiere.apps.AbstractProcessCtl;
 import org.compiere.apps.IProcessParameter;
 import org.compiere.model.MPInstance;
+import org.compiere.model.MProcess;
 import org.compiere.model.MPInstancePara;
 import org.compiere.process.ProcessInfo;
 import org.compiere.util.CLogger;
@@ -82,6 +83,18 @@ public class WProcessCtl extends AbstractProcessCtl {
 	public static void process (int WindowNo, ProcessInfo pi, Trx trx, EventListener<Event> listener)
 	{
 		if (log.isLoggable(Level.FINE)) log.fine("WindowNo=" + WindowNo + " - " + pi);
+
+		// Special Form dispatch (mirrors AbstractADWindowContent.executeButtonProcess0):
+		// callers that go straight through WProcessCtl (custom window buttons, kanban
+		// boards, plugins) otherwise ignore AD_Process.AD_Form_ID and always open the
+		// process parameter dialog.
+		if (pi.getAD_Process_ID() > 0) {
+			MProcess pr = MProcess.get(Env.getCtx(), pi.getAD_Process_ID());
+			if (pr != null && pr.getAD_Form_ID() > 0) {
+				SessionManager.getAppDesktop().openForm(pr.getAD_Form_ID());
+				return;
+			}
+		}
 
 		if (pi.getAD_PInstance_ID() < 1) { //red1 bypass if PInstance exists
 			MPInstance instance = null;
