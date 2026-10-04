@@ -89,7 +89,7 @@ public class BroadcastMessageWindow extends Window implements IBroadcastMsgPopup
 		this.pnlHead = pnlHead;
 		textMsgNo = new Label();
 		textMsgContent = new Html();
-		textMsgContent.setStyle("color:black;");
+		textMsgContent.setStyle("color: var(--zk-color-on-surface);");
 		btnPrev = new Button("<");
 		btnNext = new Button(">");
 	}
@@ -137,7 +137,7 @@ public class BroadcastMessageWindow extends Window implements IBroadcastMsgPopup
 		htmlDiv.setParent(divAlign);
 		center.appendChild(divAlign);
 		center.setBorder("rounded");
-		center.setStyle("-moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid #BBBBBB; border-radius: 3px; margin-bottom:10px;");
+		center.setStyle("-moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid var(--zk-color-outline-variant); border-radius: 3px; margin-bottom:10px;");
 		
 		South south = new South();
 		layout.appendChild(south);

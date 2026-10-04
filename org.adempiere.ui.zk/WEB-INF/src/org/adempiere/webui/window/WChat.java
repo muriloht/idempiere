@@ -70,7 +70,7 @@ public class WChat extends Window implements EventListener<Event>, DialogEvents
 	private static final long serialVersionUID = 8839053486411714175L;
 
 	private static final String USER_LABEL_STYLE = "font-weight: bold";
-	private static final String TIME_LABEL_STYLE = "font-size:xx-small;color:gray;margin-left:20px";
+	private static final String TIME_LABEL_STYLE = "font-size:xx-small;color: var(--zk-color-on-surface-variant);margin-left:20px";
 	
 	/* SysConfig USE_ESC_FOR_TAB_CLOSING */
 	private boolean isUseEscForTabClosing = MSysConfig.getBooleanValue(MSysConfig.USE_ESC_FOR_TAB_CLOSING, false, Env.getAD_Client_ID(Env.getCtx()));
@@ -146,7 +146,7 @@ public class WChat extends Window implements EventListener<Event>, DialogEvents
 		this.setStyle("position: absolute");
 		this.setAttribute(AdempiereWebUI.WIDGET_INSTANCE_NAME, "chat");
 		this.appendChild(mainPanel);
-		mainPanel.setStyle("border: none; background-color: white;");
+		mainPanel.setStyle("border: none; background-color: var(--zk-color-surface);");
 		//		
 		Center center = new Center();
 		center.setSclass("dialog-content");

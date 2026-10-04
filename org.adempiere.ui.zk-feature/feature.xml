@@ -42,11 +42,7 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.idempiere.zk.breeze.theme"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.idempiere.zk.iceblue_c.theme"
+         id="org.idempiere.zk.marble.theme"
          version="0.0.0"/>
 
    <plugin

@@ -507,7 +507,7 @@ public class WAttributeGrid extends ADForm implements EventListener<Event>
 	private Panel getGridElement (MAttributeValue xValue, MAttributeValue yValue)
 	{
 		Panel element = new Panel();
-		element.setStyle("border-width: thin; border-color: black;");
+		element.setStyle("border-width: thin; border-color: var(--zk-color-outline);");
 		
 		String sql = "SELECT * FROM M_Product WHERE IsActive='Y'";
 		//	Product Attributes
@@ -581,7 +581,7 @@ public class WAttributeGrid extends ADForm implements EventListener<Event>
 	{
 		int M_Product_ID = product.getM_Product_ID();
 		FlexVlayout pe = new FlexVlayout();
-		pe.setStyle("border-width: thin; border-color: blue;");
+		pe.setStyle("border-width: thin; border-color: var(--zk-color-primary);");
 		
 		//	Product Value - Price
 		pe.appendChild(new Label(product.getValue()));

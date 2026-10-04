@@ -85,7 +85,7 @@ public class DateRangeEditor extends Div implements ValueChangeListener {
 		this.setWidth("100%");
 		ZkCssHelper.appendStyle(this, "display: inline-block; position: relative;");
 		textbox = new Textbox();
-		textbox.setStyle("width: 100%; background: white !important");
+		textbox.setStyle("width: 100%; background: var(--zk-color-surface) !important");
 		textbox.setReadonly(true);
 		this.appendChild(textbox);
 
@@ -159,7 +159,7 @@ public class DateRangeEditor extends Div implements ValueChangeListener {
 		if(readOnly)
 			textbox.setStyle("width: 100%;");
 		else
-			textbox.setStyle("width: 100%; background: white !important");
+			textbox.setStyle("width: 100%; background: var(--zk-color-surface) !important");
 	}
 
 	@Override

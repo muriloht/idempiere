@@ -128,7 +128,7 @@ public class ProcessInfoDialog extends Window implements EventListener<Event> {
 		this.setSizable(true);
 
 		this.setBorder("normal");
-		this.setContentStyle("background-color:#ffffff;");
+		this.setContentStyle("background-color: var(--zk-color-surface);");
 		
 		lblMsg.setEncode(false);
 		lblMsg.setValue(header);

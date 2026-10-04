@@ -56,8 +56,8 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
 	 */
 	private static final long serialVersionUID = 1217160210065925924L;
 
-	private static final String POPUP_INFO_BACKGROUND_STYLE = "background-color: #262626; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid #262626; border-radius: 3px; ";
-	private static final String POPUP_ERROR_BACKGROUND_STYLE = "background-color: #8B0000; -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid #8B0000; border-radius: 3px; ";
+	private static final String POPUP_INFO_BACKGROUND_STYLE = "background-color: var(--zk-color-inverse-surface); -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid var(--zk-color-inverse-surface); border-radius: 3px; ";
+	private static final String POPUP_ERROR_BACKGROUND_STYLE = "background-color: var(--zk-color-error); -moz-border-radius: 3px; -webkit-border-radius: 3px; border: 1px solid var(--zk-color-error); border-radius: 3px; ";
 	private static final String POPUP_POSITION_STYLE = "position: absolute; z-index: 99; display: block; visibility: visible;";
 	private static final String POPUP_TEXT_STYLE = "color: white; background-color: transparent; font-size: 14px; font-weight:bold; position: relative; -moz-box-shadow: 0px 0px 0px #000;-webkit-box-shadow: 0px 0px 0px #000;box-shadow: 0px 0px 0px #000; padding: 5px; width: 590px; min-height: 20px;";
 
@@ -195,9 +195,9 @@ public class StatusBarPanel extends Panel implements EventListener<Event>, IStat
     {
     	statusLine.setText(text);
     	if (error)
-    		statusLine.setStyle("color: red");
+    		statusLine.setStyle("color: var(--zk-color-error)");
     	else
-    		statusLine.setStyle("color: black");
+    		statusLine.setStyle("color: var(--zk-color-on-surface)");
     	statusLine.setTooltiptext(text);
 
     	if (showPopup)

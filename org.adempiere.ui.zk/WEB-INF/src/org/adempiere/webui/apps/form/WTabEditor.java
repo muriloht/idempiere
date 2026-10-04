@@ -929,7 +929,7 @@ public class WTabEditor extends TabEditor implements IFormController, EventListe
 			Cell cell = pairs.getKey();
 			GridField gridField = pairs.getValue();
 			if (gridField.getAD_Field_ID() == field.getAD_Field_ID()) {
-				cell.setStyle("background-color: #BBC2DB;");
+				cell.setStyle("background-color: var(--zk-color-primary-container);");
 			} else {
 				cell.setStyle("");
 			}

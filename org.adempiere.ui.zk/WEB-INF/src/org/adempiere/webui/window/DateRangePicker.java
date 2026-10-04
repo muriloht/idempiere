@@ -207,7 +207,7 @@ public class DateRangePicker extends Popup implements EventListener<Event>, Valu
 		dateTextBox = new Textbox();
 		dateTextBox.setReadonly(true);
 		dateTextBox.setSclass("date-picker-component");
-		dateTextBox.setStyle("min-width: 170px; background: white !important");
+		dateTextBox.setStyle("min-width: 170px; background: var(--zk-color-surface) !important");
 		dateTextBox.setValue(DisplayType.getDateFormat().format(cal.getValue()));
 		dateTextBox.addEventListener(Events.ON_CHANGE, this);
 		
@@ -1024,7 +1024,7 @@ public class DateRangePicker extends Popup implements EventListener<Event>, Valu
 		c.setTime(new Date(System.currentTimeMillis()));
 		
 		Div wrapperDiv1 = new Div();
-		wrapperDiv1.setStyle("width: 420px; display: flex; border-top: 2px solid #CFCFCF;");
+		wrapperDiv1.setStyle("width: 420px; display: flex; border-top: 2px solid var(--zk-color-outline-variant);");
 		
 		// Months
 		Div wrapperDiv2 = new Div();
@@ -1078,7 +1078,7 @@ public class DateRangePicker extends Popup implements EventListener<Event>, Valu
 		innerDiv.appendChild(label);
 		
 		box = new Listbox();
-		box.setStyle("border-top: 2px solid #CFCFCF;");
+		box.setStyle("border-top: 2px solid var(--zk-color-outline-variant);");
 		box.addEventListener(Events.ON_SELECT, this);
 		box.setCheckmark(true);
 		
@@ -1104,7 +1104,7 @@ public class DateRangePicker extends Popup implements EventListener<Event>, Valu
 		innerDiv.appendChild(label);
 		
 		box = new Listbox();
-		box.setStyle("border-top: 2px solid #CFCFCF;");
+		box.setStyle("border-top: 2px solid var(--zk-color-outline-variant);");
 		box.addEventListener(Events.ON_SELECT, this);
 		box.setCheckmark(true);
 		

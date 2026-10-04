@@ -125,7 +125,7 @@ public class WWFActivity extends ADForm implements EventListener<Event>
 	private ListModelTable model = null;
 	private WListbox listbox = new WListbox();
 
-	private final static String HISTORY_DIV_START_TAG = "<div style='overflow-y:scroll;height: 100px; border: 1px solid #7F9DB9;'>";
+	private final static String HISTORY_DIV_START_TAG = "<div style='overflow-y:scroll;height: 100px; border: 1px solid var(--zk-color-outline);'>";
 	
 	/**
 	 * default constructor

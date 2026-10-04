@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zk>
+<zscript>
+    import org.compiere.model.MRefList;
+    import org.compiere.model.MSysConfig;
+    import org.compiere.model.MSystem;
+    import org.compiere.util.Env;
+    import org.compiere.util.Msg;
+    import org.compiere.util.Util;
+    var msgText = "";
+    var msgValue = MSysConfig.getValue(MSysConfig.ZK_DESKTOP_HEADER_MESSAGE_VALUE);
+	if (!Util.isEmpty(msgValue, true))
+		msgText = Msg.getMsg(Env.getCtx(), msgValue);
+</zscript>
+	<div sclass="desktop-header" use="org.adempiere.webui.panel.HeaderPanel" id="header">
+		<hlayout use="org.adempiere.webui.component.FlexHlayout" vflex="1" hflex="1" align="center">
+			<hlayout use="org.adempiere.webui.component.FlexHlayout"  height="100%" pack="start" align="center" sclass="desktop-header-left" hflex="1">
+					<image id="logo"/>
+					<div id="menuLookup"/>
+					<button id="menuButton" sclass="btn-small"/>
+					<span class="systemStatus">${msgText}</span>
+			</hlayout>
+			<hlayout use="org.adempiere.webui.component.FlexHlayout" apply="org.adempiere.webui.panel.UserPanel" pack="end" align="center"
+					sclass="desktop-user-panel" vflex="1">
+					<div id="notificationBell" sclass="desktop-header-notification-btn">
+						<span sclass="z-icon-bell desktop-header-bell-icon"/>
+						<label use="org.adempiere.webui.component.Label" id="notificationBadge" sclass="desktop-header-notification-badge" visible="false"/>
+					</div>
+					<div id="userProfileChip" sclass="desktop-header-user-chip">
+						<div id="userAvatar" sclass="desktop-header-user-avatar"/>
+						<div sclass="desktop-header-user-meta">
+							<label use="org.adempiere.webui.component.Label" id="loginUserAndRole" 
+								sclass="desktop-header-username"/>
+							<label use="org.adempiere.webui.component.Label" id="userSubText" sclass="desktop-header-usersub"/>
+						</div>
+						<span sclass="z-icon-angle-down desktop-header-user-caret"/>
+					</div>
+			</hlayout>
+		</hlayout>
+	</div>
+</zk>

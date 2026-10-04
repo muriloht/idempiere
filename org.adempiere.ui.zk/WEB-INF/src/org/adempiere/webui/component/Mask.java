@@ -29,7 +29,7 @@ public class Mask extends Div {
 	 * default constructor
 	 */
 	public Mask() {
-		setStyle("position: absolute; width: 100%; height: 100%; border: none; margin: 0; background-color: #e4e4e4; " +
+		setStyle("position: absolute; width: 100%; height: 100%; border: none; margin: 0; background-color: var(--zk-color-surface-container-high); " +
 			"padding: 0; z-index:999; opacity:0.6; top: 0px; left: 0px;");
 	}
 		

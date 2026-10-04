@@ -260,7 +260,7 @@ public class Messagebox extends Window implements EventListener<Event>
 		pnlButtons.setSclass("dialog-footer");
 		
 		this.setBorder("normal");
-		this.setContentStyle("background-color:#ffffff;");
+		this.setContentStyle("background-color: var(--zk-color-surface);");
 		this.setPosition("left, top");
 
 		inputField.getComponent().addEventListener(Events.ON_OK, this);

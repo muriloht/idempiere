@@ -1027,7 +1027,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	private void setupEmbeddedFindwindow(FindWindow findWindow) {
 		findWindow.setTitle(null);
 		findWindow.setBorder("none");	
-		findWindow.setStyle("position: absolute;background-color: #fff;");
+		findWindow.setStyle("position: absolute;background-color: var(--zk-color-surface);");
 		ZKUpdateUtil.setWidth(findWindow, "100%");
 		if (ClientInfo.maxHeight(ClientInfo.MEDIUM_HEIGHT-1))
 			ZKUpdateUtil.setHeight(findWindow, "100%");
@@ -1035,7 +1035,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 			ZKUpdateUtil.setHeight(findWindow, "60%");
 		findWindow.setZindex(1000);
 		findWindow.setSizable(false);
-		findWindow.setContentStyle("background-color: #fff; width: 99%; margin: auto;");
+		findWindow.setContentStyle("background-color: var(--zk-color-surface); width: 99%; margin: auto;");
 	}
 
 	/**

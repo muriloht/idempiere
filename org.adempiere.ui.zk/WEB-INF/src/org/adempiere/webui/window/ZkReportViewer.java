@@ -2116,7 +2116,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, IRep
 		else
 			ZKUpdateUtil.setHeight(findWindow, "60%");
 		findWindow.setSizable(false);
-		findWindow.setContentStyle("background-color: #fff; width: 99%; margin: auto;");
+		findWindow.setContentStyle("background-color: var(--zk-color-surface); width: 99%; margin: auto;");
 	}
 	
 	/**

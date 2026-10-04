@@ -87,7 +87,7 @@ public class QuickGridTabRowRenderer
 	private static final String CELL_DIV_STYLE = "height: 100%; cursor: pointer; ";
 	private static final String CELL_DIV_STYLE_ALIGN_CENTER = CELL_DIV_STYLE + "text-align:center; ";
 	private static final String CELL_DIV_STYLE_ALIGN_RIGHT = CELL_DIV_STYLE + "text-align:right; ";
-	public static final String CURRENT_ROW_STYLE = "border-top: 2px solid #6f97d2; border-bottom: 2px solid #6f97d2";
+	public static final String CURRENT_ROW_STYLE = "border-top: 2px solid var(--zk-color-primary); border-bottom: 2px solid var(--zk-color-primary)";
 	// CSS for Disabled component to visible text properly.
 	public static final String CSS_READ_ONLY_COMPONENT = "quickform-readonly ";
 

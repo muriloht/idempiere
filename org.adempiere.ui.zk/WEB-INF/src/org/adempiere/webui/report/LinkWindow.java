@@ -72,7 +72,7 @@ public class LinkWindow extends Window {
 		appendChild(btn);
 		btn.addEventListener(Events.ON_CLICK, evt -> detach());		
 		setPosition("center, center");
-		setStyle("padding: 32px;background-color: white;");
+		setStyle("padding: 32px;background-color: var(--zk-color-surface);");
 		setBorder(true);
 		setShadow(true);		
 	}

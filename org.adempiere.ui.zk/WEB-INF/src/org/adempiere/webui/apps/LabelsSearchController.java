@@ -374,7 +374,7 @@ public class LabelsSearchController implements EventListener<Event>{
 			
 			if (data.getC_Label_ID() > 0) {
 				Label labelCountUsed = new Label("(" + data.getCountUsed() + ")");
-				labelCountUsed.setStyle("color: #909090; margin-left: 4px;");
+				labelCountUsed.setStyle("color: var(--zk-color-on-surface-variant); margin-left: 4px;");
 				cell.appendChild(labelCountUsed);
 			}
 			

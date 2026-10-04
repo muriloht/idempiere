@@ -46,13 +46,10 @@
 								</artifactItem>
 								<artifactItem>
 									<groupId>org.zkoss.theme</groupId>
-									<artifactId>breeze</artifactId>
-									<version>${zk.version}</version>
-								</artifactItem>
-								<artifactItem>
-									<groupId>org.zkoss.theme</groupId>
-									<artifactId>iceblue_c</artifactId>
-									<version>${zk.version}</version>
+									<artifactId>marble</artifactId>
+									<!-- ZK 11 native theme. zkmax dep is <optional> and the copy goal
+									     does NOT resolve transitives -> no zkmax 401. -->
+									<version>${marble.version}</version>
 								</artifactItem>
 							</artifactItems>
 							<outputDirectory>lib</outputDirectory>

@@ -456,9 +456,8 @@
         <setEntry value="org.idempiere.tablepartition@default:default"/>
         <setEntry value="org.idempiere.ui.sso.oidc@default:default"/>
         <setEntry value="org.idempiere.zk.billboard@default:default"/>
-        <setEntry value="org.idempiere.zk.breeze.theme@default:false"/>
         <setEntry value="org.idempiere.zk.extra@default:default"/>
-        <setEntry value="org.idempiere.zk.iceblue_c.theme@default:false"/>
+        <setEntry value="org.idempiere.zk.marble.theme@default:false"/>
     </setAttribute>
     <booleanAttribute key="show_selected_only" value="false"/>
     <booleanAttribute key="tracing" value="false"/>

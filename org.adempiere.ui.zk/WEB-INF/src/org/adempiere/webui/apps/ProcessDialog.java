@@ -385,9 +385,9 @@ public class ProcessDialog extends AbstractProcessDialog implements EventListene
 		layoutResultPanel (topParameterLayout);
 		
 		StringBuilder buildMsg = new StringBuilder(getInitialMessage());
-		buildMsg.append("<hr><p><font color=\"").append(pi.isError() ? "#FF0000" : "#0000FF").append("\">** ")
+		buildMsg.append("<hr><p><span style=\"color:").append(pi.isError() ? "var(--zk-color-error)" : "var(--zk-color-primary)").append("\">** ")
 		.append(pi.getSummary())
-		.append("</font></p>");
+		.append("</span></p>");
 	
 		((Html)messageResultContent).setContent (buildMsg.toString());
 		

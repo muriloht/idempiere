@@ -76,7 +76,7 @@ public class DocumentSearchController implements EventListener<Event> {
 	private static final String FOOTER_CLOSING_TAG = "</#footer>";
 
 	/** Style for transaction code guide or execution error */
-	private static final String MESSAGE_LABEL_STYLE = "color: rgba(0,0,0,0.34)";
+	private static final String MESSAGE_LABEL_STYLE = "color: var(--zk-color-on-surface-variant)";
 	/**
 	 * {@link A} component attribute to hold reference to corresponding
 	 * {@link #SEARCH_RESULT}

@@ -120,7 +120,7 @@ public class TimeoutPanel extends Window implements
 
 		ltime = new Label(minConverted +" : "+secConverted);
 		ltime.setParent(centerVlayout);
-		ltime.setStyle("text-align: center; font-size: 40px; color:red;");
+		ltime.setStyle("text-align: center; font-size: 40px; color: var(--zk-color-error);");
 		
 		Html txtLbl = new Html(Msg.getMsg(Env.getCtx(),"Minutes")+"&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;"+Msg.getMsg(Env.getCtx(),"Seconds"));
 		txtLbl.setParent(centerVlayout);

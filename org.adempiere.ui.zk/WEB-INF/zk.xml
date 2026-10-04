@@ -126,7 +126,7 @@
     </library-property>
     <library-property>
         <name>org.zkoss.theme.preferred</name>
-        <value>breeze</value>
+        <value>marble</value>
     </library-property>
 	<preference>
     	<name>org.zkoss.zk.ui.WebApp.name</name>
