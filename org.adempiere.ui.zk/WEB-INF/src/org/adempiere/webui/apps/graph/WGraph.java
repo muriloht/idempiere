@@ -427,7 +427,6 @@ public class WGraph extends Div implements IdSpace {
 		td.appendChild(text);
 		td = new Td();
 		td.setDynamicProperty("colspan", "2");
-		td.setSclass("pa-tdcontent");
 		tr.appendChild(td);
 		text = new Text(format.format(m_goal.getMeasureTarget().setScale(2,
 				RoundingMode.HALF_UP)));
@@ -442,7 +441,6 @@ public class WGraph extends Div implements IdSpace {
 		td.appendChild(text);
 		td = new Td();
 		td.setDynamicProperty("colspan", "2");
-		td.setSclass("pa-tdcontent");
 		tr.appendChild(td);
 		text = new Text(format.format(m_goal.getMeasureActual().setScale(2,
 				RoundingMode.HALF_UP)));

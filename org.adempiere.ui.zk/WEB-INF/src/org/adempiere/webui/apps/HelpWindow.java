@@ -175,7 +175,6 @@ public class HelpWindow extends Window {
 			tr = new tr();
 			table.addElement(tr);
 			td = new td();
-			td.setClass("help-window-entitytype-help");
 			tr.addElement(td);
 
 			title = new StringBuilder(Msg.getElement(Env.getCtx(), "EntityType")).append(": ")
@@ -376,7 +375,6 @@ public class HelpWindow extends Window {
 			tr = new tr();
 			table.addElement(tr);
 			td = new td();
-			td.setClass("help-window-tab-entitytype-help");
 			tr.addElement(td);
 
 			StringBuilder entityType = new StringBuilder(Msg.getElement(Env.getCtx(), "EntityType")).append(": ").append(MEntityType.get(Env.getCtx(), tab.getEntityType()).getName());
@@ -535,7 +533,6 @@ public class HelpWindow extends Window {
 				tr = new tr();
 				table.addElement(tr);
 				td = new td();
-				td.setClass("help-window-field-entitytype-help");
 				tr.addElement(td);
 				StringBuilder entityType = new StringBuilder(Msg.getElement(Env.getCtx(), "EntityType")).append(": ")
 						.append(et.getName());

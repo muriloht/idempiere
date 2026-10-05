@@ -111,7 +111,7 @@ public class FavouriteFolderDialog extends Window implements EventListener<Event
 		this.setSizable(true);
 		this.setMaximizable(true);
 		this.setMode(Window.MODE_HIGHLIGHTED);
-		this.setSclass("popup-dialog fav-add-edit-dialog");
+		this.setSclass("popup-dialog");
 		ZKUpdateUtil.setWindowWidthX(this, 325);
 		ZKUpdateUtil.setWindowHeightX(this, 225);
 
@@ -143,7 +143,6 @@ public class FavouriteFolderDialog extends Window implements EventListener<Event
 		if (isAdd)
 		{
 			chkAddAsRoot = new Checkbox();
-			chkAddAsRoot.setClass("fav-chkbox");
 			chkAddAsRoot.setText(Msg.getMsg(Env.getCtx(), "AddAsRoot"));
 			chkAddAsRoot.setTooltiptext(Msg.getMsg(Env.getCtx(),"Tooltip_AddAsRoot"));
 			row = new Row();
@@ -152,7 +151,6 @@ public class FavouriteFolderDialog extends Window implements EventListener<Event
 		}
 
 		chkDefaultExpanded = new Checkbox();
-		chkDefaultExpanded.setClass("fav-chkbox");
 		chkDefaultExpanded.setText(Msg.getMsg(Env.getCtx(), "DefaultExpanded"));
 		chkDefaultExpanded.setTooltiptext(Msg.getMsg(Env.getCtx(), "Tooltip_DefaultExpanded"));
 		row = new Row();

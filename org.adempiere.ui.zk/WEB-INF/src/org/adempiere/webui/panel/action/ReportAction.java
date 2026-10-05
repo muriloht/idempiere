@@ -158,7 +158,6 @@ public class ReportAction implements EventListener<Event>
 			ZKUpdateUtil.setHeight(vb, "200px");
 			winReport.appendChild(vb);
 			winReport.setSclass("toolbar-popup-window");
-			vb.setSclass("toolbar-popup-window-cnt");
 			
 			Grid grid = GridFactory.newGridLayout();
 			ZkCssHelper.appendStyle(grid, "flex-grow: 1;");

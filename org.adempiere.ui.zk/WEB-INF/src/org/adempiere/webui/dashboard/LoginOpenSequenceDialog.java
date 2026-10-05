@@ -114,7 +114,7 @@ public class LoginOpenSequenceDialog extends Window
 		this.setSizable(true);
 		this.setClosable(true);
 		this.setMaximizable(true);
-		this.setSclass("popup-dialog fav-login-open-seq-dialog");
+		this.setSclass("popup-dialog");
 		this.setStyle("position: relative; margin: none; border: none; padding: none;");
 		ZKUpdateUtil.setWindowWidthX(this, 650);
 		ZKUpdateUtil.setWindowHeightX(this, 450);

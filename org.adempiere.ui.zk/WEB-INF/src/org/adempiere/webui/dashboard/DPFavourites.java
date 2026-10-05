@@ -88,7 +88,6 @@ public class DPFavourites extends DashboardPanel implements EventListener<Event>
 		//
 		btnExpand = new ToolBarButton("Expand");
 		btnExpand.setChecked(false);
-		btnExpand.setClass("fav-button-Expand");
 		btnExpand.addEventListener(Events.ON_CLICK, this);
 		btnExpand.setTooltiptext(Msg.getMsg(Env.getCtx(), "Tooltip_ExpandCollapseTree"));
 		if (ThemeManager.isUseFontIconForImage())
@@ -98,7 +97,6 @@ public class DPFavourites extends DashboardPanel implements EventListener<Event>
 
 		//
 		btnAdd = new ToolBarButton("AddFolder");
-		btnAdd.setClass("fav-button-add");
 		btnAdd.setTooltiptext(Msg.getMsg(Env.getCtx(), "AddFolder"));
 		btnAdd.addEventListener(Events.ON_CLICK, this);
 		if (ThemeManager.isUseFontIconForImage())
@@ -108,7 +106,6 @@ public class DPFavourites extends DashboardPanel implements EventListener<Event>
 
 		//
 		btnEdit = new ToolBarButton("Edit");
-		btnEdit.setClass("fav-button-edit");
 		btnEdit.setTooltiptext(Msg.getMsg(Env.getCtx(), "EditFolder"));
 		btnEdit.addEventListener(Events.ON_CLICK, this);
 		btnEdit.setDisabled(true);
@@ -119,7 +116,6 @@ public class DPFavourites extends DashboardPanel implements EventListener<Event>
 
 		//
 		btnAutoLaunch = new ToolBarButton("AutoLaunch");
-		btnAutoLaunch.setClass("fav-button-autolaunch");
 		btnAutoLaunch.setTooltiptext(Msg.getMsg(Env.getCtx(), "AutoLaunch"));
 		btnAutoLaunch.addEventListener(Events.ON_CLICK, this);
 		if (ThemeManager.isUseFontIconForImage())
@@ -129,7 +125,6 @@ public class DPFavourites extends DashboardPanel implements EventListener<Event>
 
 		//
 		Toolbar toolbar = new Toolbar();
-		toolbar.setClass("fav-toolbar");
 		toolbar.appendChild(btnExpand);
 		toolbar.appendChild(btnAdd);
 		toolbar.appendChild(btnEdit);

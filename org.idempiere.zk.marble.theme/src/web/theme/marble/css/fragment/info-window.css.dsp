@@ -26,6 +26,8 @@
 	margin-top: 2px;
 }
 
-.info-panel .statusBar > div > .z-west,  .info-panel .statusBar > div > .z-east {
+<%-- status bar (StatusBarPanel inner borderlayout, class "statusBar") - generic so it also
+     applies in FindWindow/forms, not only inside .info-panel --%>
+.statusBar > div > .z-west, .statusBar > div > .z-east {
 	border: none;
 }

@@ -1128,7 +1128,6 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 				ZKUpdateUtil.setHflex(embeddedPaging, "1");
 				embeddedPaging.setMold("os");
 				embeddedPaging.setVisible(false);
-				embeddedPaging.setSclass("infowindow-related-paging");
 
 				//Xolali - add embeddedTbl to list, add m_sqlembedded to list
 				EmbedWinInfo ewinInfo = new EmbedWinInfo(embedInfo, embeddedTbl, m_sqlEmbedded, relatedInfo.getLinkColumnName(), relatedInfo.getLinkInfoColumn(), relatedInfo.getParentRelatedColumn_ID());

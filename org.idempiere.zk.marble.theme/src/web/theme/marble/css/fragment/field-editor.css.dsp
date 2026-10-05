@@ -55,31 +55,151 @@
 }
 
 <%-- chosen box --%>
+<%-- Marble styles the zkmax Chosenbox, but iDempiere ships its OWN forked chosenbox addon
+     (org.zkoss.addon.chosenbox; DOM: .z-chosenbox-inp/-sel-item/-sel-item-cnt/-del-btn/-pp/-option)
+     whose CSS path is outside Marble's theme-provider rewrite scope, so it kept the legacy
+     gradient/sprite look. Re-skin the fork's ACTUAL DOM with Marble tokens to match the theme. --%>
 .z-chosenbox {
+	background: var(--zk-color-surface);
 	background-image: none;
+	border: 1px solid var(--zk-color-outline-variant);
+	border-radius: var(--zk-shape-corner-extra-small);
+	min-height: var(--zk-control-height);
+	box-sizing: border-box;
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 6px;
+	cursor: text;
+	overflow: visible;
 }
-.z-chosenbox:has(> input:focus) {
-	background: var(--zk-field-editor-chosenbox-focus-background-color) !important;
-	border-color: var(--zk-field-editor-chosenbox-focus-border-color) !important;
+.z-chosenbox:hover {
+	border-color: var(--zk-color-outline);
 }
-<%-- include/exclude icon for chosenbox --%>
-.editor-box + .btn-negate.z-button > .z-icon-ExcludeSelected::before,
-.editor-box + .btn-negate.z-button > .z-icon-IncludeSelected::before {
-	color: var(--zk-field-editor-button-icon-color);
+.z-chosenbox:has(> .z-chosenbox-inp:focus),
+.z-chosenbox-focus {
+	border-color: var(--zk-color-primary);
+	box-shadow: 0 0 0 1px var(--zk-color-primary);
+}
+<%-- selected chips --%>
+.z-chosenbox-sel-item {
+	background: var(--zk-color-surface-container-high);
+	background-image: none;
+	border: none;
+	border-radius: var(--zk-shape-corner-extra-small);
+	color: var(--zk-color-on-surface);
+	margin: 0;
+	padding: 0 4px 0 8px;
+	height: 26px;
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+	flex-shrink: 0;
+	white-space: nowrap;
+}
+.z-chosenbox-sel-item-focus {
+	background: var(--zk-color-secondary-container);
+	border-color: transparent;
+}
+.z-chosenbox-sel-item-cnt {
+	color: var(--zk-color-on-surface);
+	font-family: var(--zk-base-content-font-family);
+	padding: 0 2px;
+}
+<%-- chip delete (x): drop the legacy sprite for a clean glyph button --%>
+.z-chosenbox-del-btn {
+	background: none !important;
+	border: none;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	position: relative;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+.z-chosenbox-del-btn::before {
+	content: "\00d7";
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 15px;
+	line-height: 1;
+	color: var(--zk-color-on-surface-variant);
+}
+.z-chosenbox-del-btn:hover {
+	background: rgba(0, 0, 0, 0.08) !important;
+}
+<%-- inline text input --%>
+.z-chosenbox-inp {
+	background: transparent !important;
+	border: 0 !important;
+	outline: 0;
+	box-shadow: none;
+	color: var(--zk-color-on-surface);
+	font-family: var(--zk-base-content-font-family);
+	flex: 1;
+	min-width: 60px;
+	padding: 0 4px;
+}
+<%-- dropdown popup + options --%>
+.z-chosenbox-pp {
+	background: var(--zk-color-surface);
+	border: 1px solid var(--zk-color-outline-variant);
+	border-radius: var(--zk-shape-corner-small);
+	box-shadow: var(--zk-elevation-dropdown);
+	overflow: auto;
+}
+.z-chosenbox-option {
+	padding: 6px 12px;
+	color: var(--zk-color-on-surface);
+	cursor: pointer;
+}
+.z-chosenbox-option-over {
+	background: var(--zk-color-surface-container-high);
+}
+.z-chosenbox-empty {
+	padding: 6px 12px;
+	color: var(--zk-color-on-surface-variant);
+}
+.z-chosenbox-empty-creatable {
+	padding: 6px 12px;
+	color: var(--zk-color-primary);
+	cursor: pointer;
+}
+<%-- include/exclude icon for chosenbox - M3 state color via the btn-negate-include/-exclude
+     classes (set in ProcessParameterPanel): include=primary (included), exclude=error (negated) --%>
+.editor-box + .btn-negate-include.z-button > .z-icon-IncludeSelected::before {
+	color: var(--zk-color-primary);
+}
+.editor-box + .btn-negate-exclude.z-button > .z-icon-ExcludeSelected::before {
+	color: var(--zk-color-error);
+}
+<%-- Marble's param-grid cells are position:static, so this absolutely-positioned button
+     escaped to the grid body (rendered top-right of the whole panel = "torto"). Anchor it
+     to its own field box and center it vertically in the control. --%>
+.z-div:has(> .btn-negate) {
+	position: relative;
 }
 .editor-box + .btn-negate.z-button {
 	background: none;
 	border: none;
 	margin: 0px !important;
 	padding: 0px;
-	min-width: 16px;
-	width: 16px;	
-	height: 10px;
-	min-height:10px;
+	min-width: 18px;
+	width: 18px;
+	height: 18px;
+	min-height: 18px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 	font-size: 14px;
-	font-weight: lighter;		
+	font-weight: lighter;
 	position: absolute;
-	top: 4px;
+	top: 50%;
+	transform: translateY(-50%);
 	right: 30px;
 	z-index: 2000;
 }
@@ -91,7 +211,7 @@
 .editor-box + .btn-negate.z-button [class^="z-icon-"] {
 	font-size: 14px;
 	padding: 0px;
-	line-height: 14px;
+	line-height: 1;
 }
 
 <%-- datetime box --%>

@@ -851,7 +851,6 @@ public class FindWindow extends Window implements EventListener<Event>, ValueCha
 			winMain.getComponent().getTabpanel(1).getLinkedTab().setVisible(false);
 		}
         
-        statusBar.setClass("statusbar");
         layout.appendChild(statusBar);
     } // initPanel
     
