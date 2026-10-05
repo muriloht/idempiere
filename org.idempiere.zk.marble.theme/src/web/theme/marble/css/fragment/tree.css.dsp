@@ -4,17 +4,6 @@
 	${fontFamilyC};
 	${fontSizeM};
 }
-@media screen and (min-width: 768px) {
-	.z-treecell-content {
-		padding: 0px 1px;
-	}
-}
-
-@media screen and (max-width: 767px) {
-	.z-treecell-content {
-		padding: 2px 1px;
-	}
-}
 .z-treecell-content > .menu-href.z-a {
 	margin-left: 8px;
 }

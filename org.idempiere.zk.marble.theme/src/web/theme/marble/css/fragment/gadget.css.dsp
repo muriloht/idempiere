@@ -39,14 +39,6 @@
 }
 
 .dashboard-widget.z-panel {
-	display: flex; 
-	flex-direction: column; 
-	justify-content: stretch;
-}
-.dashboard-widget > .z-panel-body {
-	flex-grow: 1;
-}
-.dashboard-widget.z-panel {
 	border: 1px solid var(--zk-gadget-dashboard-widget-border-color);
 }
 .dashboard-widget {

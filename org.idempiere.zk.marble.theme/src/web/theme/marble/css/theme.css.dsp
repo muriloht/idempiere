@@ -242,9 +242,6 @@ html,body {
 	overflow: hidden;
 }
 
-.z-html p{
-	margin:0px;
-}
 
 .z-initing {
     background-image: url(${c:encodeURL('~./theme/marble/images/zssosepowered.png')}) !important;

@@ -112,9 +112,6 @@ div.wc-modal, div.wc-modal-none, div.wc-highlighted, div.wc-highlighted-none {
 .z-notification-info .z-notification-left {
 	border-right-color: var(--zk-window-transparent-color);
 }
-.z-notification-left + .z-notification-icon {
-  left: 12px;
-}
 
 <%-- Quick Form Read-only Component --%>
 .quickform-readonly .z-textbox-readonly, .quickform-readonly .z-intbox-readonly, .quickform-readonly .z-longbox-readonly, .quickform-readonly .z-doublebox-readonly,

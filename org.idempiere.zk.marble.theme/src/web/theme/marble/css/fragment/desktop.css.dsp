@@ -400,9 +400,6 @@
 	padding-top: 0px;
 	padding-bottom: 0px;
 }
-.desktop-tabbox > .z-tabpanels {
-	flex-grow: 1 1 0;
-}
 .desktop-tabbox .z-tabs .z-toolbar-tabs-body {
 	padding: 0px !important;
 	margin: 0px !important;
