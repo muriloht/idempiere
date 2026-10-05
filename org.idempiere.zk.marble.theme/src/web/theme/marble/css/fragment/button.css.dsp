@@ -58,6 +58,24 @@
 	color: var(--zk-button-cancel-hover-color);
 }
 
+<%-- ghost ButtonFactory icon buttons (keep btn-ok/cancel/help) --%>
+.font-icon-button.z-button:not(.btn-ok):not(.btn-cancel):not(.btn-help) {
+	background: transparent;
+	box-shadow: none;
+}
+.font-icon-button.z-button:not(.btn-ok):not(.btn-cancel):not(.btn-help)::before {
+	background: var(--zk-color-on-surface-variant);
+}
+.font-icon-button.z-button:not(.btn-ok):not(.btn-cancel):not(.btn-help) [class^="z-icon-"] {
+	color: var(--zk-color-on-surface-variant);
+}
+.font-icon-button.z-button:not(.btn-ok):not(.btn-cancel):not(.btn-help):hover {
+	background: var(--zk-color-surface-container-high);
+}
+.font-icon-button.z-button:not(.btn-ok):not(.btn-cancel):not(.btn-help):hover [class^="z-icon-"] {
+	color: var(--zk-color-primary);
+}
+
 .z-icon-Help, .z-icon-Cancel {
 	color: var(--zk-button-cancel-color) !important;
 }

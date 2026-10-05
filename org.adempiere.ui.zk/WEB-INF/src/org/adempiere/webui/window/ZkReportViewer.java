@@ -371,6 +371,7 @@ public class ZkReportViewer extends Window implements EventListener<Event>, IRep
 		ZKUpdateUtil.setHeight(toolBar, "32px");
 		
 		ZKUpdateUtil.setWidth(toolBar, "100%");
+		toolBar.setSclass("report-viewer-toolbar");
 		
 		previewType.setMold("select");
 		if (ClientInfo.maxWidth(ClientInfo.SMALL_WIDTH - 1))

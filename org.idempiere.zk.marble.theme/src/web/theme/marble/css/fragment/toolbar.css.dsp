@@ -46,6 +46,22 @@
 	padding-top: 0px;
 	padding-bottom: 0px;
 }
+
+<%-- report viewer toolbar: neutral surface app-bar (M3) instead of Marble primary --%>
+.report-viewer-toolbar.z-toolbar {
+	background-color: var(--zk-toolbar-bg);
+	color: var(--zk-color-on-surface);
+	border-bottom: 1px solid var(--zk-toolbar-border-color);
+}
+.report-viewer-toolbar .z-toolbarbutton {
+	color: var(--zk-color-on-surface-variant);
+}
+.report-viewer-toolbar .z-toolbarbutton:before {
+	background-color: var(--zk-color-on-surface);
+}
+.report-viewer-toolbar .z-toolbarseparator {
+	background-color: var(--zk-color-outline-variant);
+}
 .z-toolbar-start{
 	width:100%;
 }

@@ -26,6 +26,12 @@
 	margin-top: 2px;
 }
 
+<%-- criteria textarea: collapse Marble 80px min-height to single line --%>
+.info-panel textarea.z-textbox {
+	min-height: var(--zk-control-height);
+	height: var(--zk-control-height);
+}
+
 <%-- status bar (StatusBarPanel inner borderlayout, class "statusBar") - generic so it also
      applies in FindWindow/forms, not only inside .info-panel --%>
 .statusBar > div > .z-west, .statusBar > div > .z-east {

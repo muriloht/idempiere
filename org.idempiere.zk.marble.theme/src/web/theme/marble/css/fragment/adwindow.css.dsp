@@ -10,6 +10,13 @@
 	overflow: visible !important;
 }
 
+<%-- form grids (grid-layout/find): drop Marble .z-row separator line --%>
+.grid-layout .z-row,
+.find-window .z-row,
+.find-window-simple .z-row {
+	border-bottom: none;
+}
+
 <%-- main vlayout of AD window --%>
 .adwindow-layout {
 	position:absolute; 
@@ -234,6 +241,18 @@
 	font-size: 14px;
 	height: 14px;
 	width: 14px;
+}
+<%-- grid selection checkbox: fit Marble's 48px mold touch-target into the narrow column --%>
+.adtab-grid .z-checkbox-mold {
+	margin: 2px;
+}
+.adtab-grid .z-checkbox-mold:before {
+	inset: -6px;
+}
+.adtab-grid .z-cell:first-child,
+.adtab-grid .z-column:first-child {
+	padding-left: 2px;
+	padding-right: 2px;
 }
 .adtab-grid > .z-grid-header > table > tbody > tr.z-columns > th.z-column > .z-column-content {
 	text-overflow: ellipsis;	

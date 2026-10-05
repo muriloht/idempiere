@@ -147,6 +147,8 @@
 	--zk-grid-content-hover-text-color: var(--zk-color-on-surface);
 	--zk-grid-sort-active-background-color: var(--zk-color-surface-container-high, #e8eef7);
 	--zk-grid-row-cell-border-color: var(--zk-color-outline-variant);
+	/* row hover 4% -> M3 8%; grids stay flat */
+	--zk-grid-row-hover-bg: color-mix(in srgb, var(--zk-color-on-surface) 8%, transparent);
 
 	--zk-group-row-background-color: var(--zk-color-surface-container);
 	--zk-group-header-text-color: var(--zk-color-on-surface);

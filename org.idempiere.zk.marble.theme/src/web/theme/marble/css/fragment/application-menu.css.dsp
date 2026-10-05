@@ -178,17 +178,21 @@
 }
 <%-- application menu search result list item --%>
 .menu-search-list-toolbar-cell.z-listcell > div.z-listcell-content {
-	display: inline-flex; 
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	padding: 0;
 }
 .menu-search-list-toolbar-cell.z-listcell .fav-new-btn.z-toolbarbutton [class^="z-icon-"] {
 	font-size: larger;
 }
+<%-- fav button: neutralize Marble toolbarbutton min-width so the star fits the narrow cell --%>
 .menu-search-list-toolbar-cell .fav-new-btn {
 	padding: 0px;
     border-left: 0px;
     border-right: 0px;
+    min-width: 0;
+    width: 100%;
 }
 
 <%-- dropdown menu item --%>

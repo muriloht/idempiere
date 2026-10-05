@@ -19,6 +19,11 @@
 	padding-right: 5px;
 }
 
+<%-- combobox editor: restore inline-flex so input fills to the button --%>
+.editor-input.z-combobox {
+	display: inline-flex;
+}
+
 <%-- button for field --%>
 .editor-button {
 	padding: 0px;
