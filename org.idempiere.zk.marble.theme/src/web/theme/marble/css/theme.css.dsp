@@ -71,7 +71,7 @@
 
 	--zk-drill-window-field-color: var(--zk-color-on-surface-variant);
 
-	--zk-field-editor-button-icon-color: var(--zk-body-text-color);
+	--zk-field-editor-button-icon-color: var(--zk-color-on-surface-variant);
 	--zk-field-editor-button-hover-icon-color: var(--zk-color-on-surface);
 	--zk-field-editor-chosenbox-focus-background-color: var(--zk-color-surface-container-high);
 	--zk-field-editor-chosenbox-focus-border-color: var(--zk-color-primary);

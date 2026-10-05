@@ -10,7 +10,10 @@
 	overflow: visible !important;
 }
 
-<%-- form grids (grid-layout/find): drop Marble .z-row separator line --%>
+<%-- form grids (grid-layout/find): drop Marble's box border + row separator line --%>
+.grid-layout.z-grid {
+	border: none;
+}
 .grid-layout .z-row,
 .find-window .z-row,
 .find-window-simple .z-row {
@@ -102,14 +105,17 @@
 	line-height: inherit;
 }
 
-<%-- dropdown menu icon --%>
+<%-- breadcrumb dropdown caret: lucide mask (FontAwesome removed). TODO: move to icon map --%>
 .adwindow-breadcrumb-menu::after {
-	font-family: var(--zk-icon-font-family);
-	font-weight: 900;
-    font-style: normal;
-	font-size: 12px;
-    content: "\f0d7";
-    margin-left: 3px;
+	content: "";
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin-left: 3px;
+	vertical-align: middle;
+	background-color: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E %3Cpath d=%22m6 9 6 6 6-6%22 /%3E %3C/svg%3E") center/contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 %3E %3Cpath d=%22m6 9 6 6 6-6%22 /%3E %3C/svg%3E") center/contain no-repeat;
 }
 
 <%-- div container of detail tabbox --%>

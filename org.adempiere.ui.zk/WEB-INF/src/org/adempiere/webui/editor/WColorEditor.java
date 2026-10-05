@@ -94,7 +94,7 @@ public class WColorEditor extends WEditor implements ContextMenuListener
 		init();
 
 		if (ThemeManager.isUseFontIconForImage())
-			getComponent().getButton().setIconSclass(Icon.getIconSclass(Icon.PENCIL));
+			getComponent().getButton().setIconSclass(Icon.getIconSclass(Icon.PALETTE));
 		else
 			getComponent().setButtonImage(ThemeManager.getThemeResource("images/ColorPicker16.png")); 
 
@@ -195,7 +195,7 @@ public class WColorEditor extends WEditor implements ContextMenuListener
 		editor.setAttribute("EVENT", COLOR_PICKER_EVENT);
 		editor.setLabel(Msg.getMsg(Env.getCtx(), "ColorPicker"));
 		if (ThemeManager.isUseFontIconForImage())
-			editor.setIconSclass(Icon.getIconSclass(Icon.PENCIL));
+			editor.setIconSclass(Icon.getIconSclass(Icon.PALETTE));
 		else
 			editor.setImage(ThemeManager.getThemeResource("images/ColorPicker16.png"));
 		editor.addEventListener(Events.ON_CLICK, popupMenu);

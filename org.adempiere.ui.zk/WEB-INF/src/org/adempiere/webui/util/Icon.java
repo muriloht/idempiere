@@ -78,6 +78,7 @@ public final class Icon {
     public static final String PATTRIBUTE               = "PAttribute";
     public static final String PAYMENT                  = "Payment";
     public static final String PENCIL                   = "Pencil";
+    public static final String PALETTE                   = "Palette";
     public static final String PREFERENCE               = "Preference";
     public static final String PREVIOUS                 = "Previous";
     public static final String PROCESS                  = "Process";
