@@ -228,8 +228,8 @@ public class CompareCtxHelpSuggestion extends ADForm {
 			builder.append(s);
 		}
 		String s = builder.toString();
-		s = s.replace("class=\"diff-tag-removed\"", "style=\"font-size: 100%;text-decoration: line-through;background-color: var(--zk-color-error-container);\"");
-		s = s.replace("class=\"diff-tag-added\"", "style=\"font-size: 100%;background-color: var(--zk-color-success-container);\"");
+		s = s.replace("class=\"diff-tag-removed\"", "style=\"font-size: 100%;text-decoration: line-through;background-color: color-mix(in srgb, var(--zk-color-status-error) 20%, transparent);\"");
+		s = s.replace("class=\"diff-tag-added\"", "style=\"font-size: 100%;background-color: color-mix(in srgb, var(--zk-color-status-success) 20%, transparent);\"");
 		Html html = new Html(s);
 		return html;
 	}

@@ -16,15 +16,6 @@
     --zk-toolbar-button-checked-color: var(--zk-color-on-primary); /* var(--zk-text-color-default3); */
     --zk-toolbar-button-checked-background-color: var(--zk-color-primary); /* var(--zk-color-primary); */
 
-	/* M3 tonal containers for the success/warning roles that Marble ships only in their
-	   solid form. Derived with Marble's OWN oklch recipe (same L/C as --zk-color-error-container
-	   / --zk-color-on-error-container) so they track the theme's primary hue automatically —
-	   no hand-painted hex. Used by the setup-wizard status legend and the compare-ctx diff. */
-	--zk-color-success-container: oklch(from var(--zk-color-success) 0.89 calc(c * 0.28) h);
-	--zk-color-on-success-container: oklch(from var(--zk-color-success) 0.375 calc(c * 0.77) h);
-	--zk-color-warning-container: oklch(from var(--zk-color-warning) 0.89 calc(c * 0.28) h);
-	--zk-color-on-warning-container: oklch(from var(--zk-color-warning) 0.375 calc(c * 0.77) h);
-
 	/* Custom CSS variables */
 	--zk-body-background-color: var(--zk-color-surface-container, #f0f4fa); /* was iceblue #D4E3F4 -> Marble soft surface */
     --zk-body-text-color: var(--zk-color-on-surface);
@@ -111,10 +102,10 @@
 	--zk-find-window-separator-gradient-mid-color: var(--zk-color-outline-variant);
 	--zk-find-window-checkbox-checked-color: var(--zk-color-primary);
 
-	--zk-font-icons-error-message-color: var(--zk-color-error);
-	--zk-font-icons-exclamation-message-color: var(--zk-color-warning);
-	--zk-font-icons-info-message-color: var(--zk-color-primary);
-	--zk-font-icons-question-message-color: var(--zk-color-success);
+	--zk-font-icons-error-message-color: var(--zk-color-status-error);
+	--zk-font-icons-exclamation-message-color: var(--zk-color-status-warning);
+	--zk-font-icons-info-message-color: var(--zk-color-status-info);
+	--zk-font-icons-question-message-color: var(--zk-color-status-success);
 
 	--zk-form-busy-dialog-background-color: transparent;
 	--zk-form-busy-dialog-box-background-color: transparent;
@@ -201,13 +192,14 @@
 	--zk-parameter-process-bottom-border-color: var(--zk-color-outline-variant);
 	--zk-parameter-process-placeholder-color: var(--zk-color-on-surface-variant);
 
-	/* Status legend — 5 distinct M3 tonal hues (soft container bg + default dark text):
-	   finished=green, in-progress=blue, pending=amber, delayed=red, skipped=neutral. */
-	--zk-setup-wizard-finished-background-color: var(--zk-color-success-container);
-	--zk-setup-wizard-skipped-background-color: var(--zk-color-surface-container-high);
-	--zk-setup-wizard-delayed-background-color: var(--zk-color-error-container);
-	--zk-setup-wizard-in-progress-background-color: var(--zk-color-primary-container);
-	--zk-setup-wizard-pending-background-color: var(--zk-color-warning-container);
+	/* Status legend — Marble's canonical status roles as soft backgrounds via its own
+	   color-mix idiom (20% tint, same as .z-progressmeter-*): finished=success,
+	   in-progress=info, pending=warning, delayed=error, skipped=neutral. */
+	--zk-setup-wizard-finished-background-color: color-mix(in srgb, var(--zk-color-status-success) 20%, transparent);
+	--zk-setup-wizard-skipped-background-color: color-mix(in srgb, var(--zk-color-status-neutral) 20%, transparent);
+	--zk-setup-wizard-delayed-background-color: color-mix(in srgb, var(--zk-color-status-error) 20%, transparent);
+	--zk-setup-wizard-in-progress-background-color: color-mix(in srgb, var(--zk-color-status-info) 20%, transparent);
+	--zk-setup-wizard-pending-background-color: color-mix(in srgb, var(--zk-color-status-warning) 20%, transparent);
 	--zk-setup-wizard-progress-border-color: var(--zk-color-outline-variant);
 
 	--zk-toolbar-popup-window-border-color: var(--zk-color-outline-variant);
