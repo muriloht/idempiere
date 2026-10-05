@@ -242,6 +242,19 @@
 	justify-content: center;
 	align-items: center;
 }
+<%-- let long gauge titles wrap instead of truncating (the grid cells inherit z-row nowrap) --%>
+.performance-panel .z-row-inner,
+.performance-panel .z-row-content {
+	white-space: normal;
+	overflow: visible;
+}
+.performance-indicator-title,
+.performance-indicator-title .z-label {
+	white-space: normal;
+}
+.performance-indicator-title .z-label {
+	min-width: 0;
+}
 .performance-panel .z-grid {
 	border: none;
 	margin:0px; 

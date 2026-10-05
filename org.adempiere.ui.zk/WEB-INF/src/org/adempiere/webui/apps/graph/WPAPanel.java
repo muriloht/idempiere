@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 import org.adempiere.webui.apps.graph.WPerformanceIndicator.Options;
+import org.adempiere.webui.component.Column;
+import org.adempiere.webui.component.Columns;
 import org.adempiere.webui.component.Grid;
 import org.adempiere.webui.component.Panel;
 import org.adempiere.webui.component.Row;
@@ -106,6 +108,22 @@ public class WPAPanel extends Panel implements EventListener<Event>
 		appendChild(grid);
 		grid.makeNoStrip();
 
+		//	Gauges per row - single source of truth for both the row wrapping below and the
+		//	equal column widths. Define explicit, equal-width columns so the ZK 11 grid lays
+		//	the gauges out deterministically; relying on content-based column sizing clipped
+		//	the narrow column under ZK 11 (worked under ZK 10 / iceblue). Width is derived from
+		//	cols (2 -> 50%, 3 -> 33%, ...) so it never hardcodes a value and scales with the
+		//	gadget width (dashboard ColumnNo).
+		int cols = 2;
+		Columns columns = new Columns();
+		grid.appendChild(columns);
+		for (int c = 0; c < cols; c++)
+		{
+			Column column = new Column();
+			column.setWidth((100 / cols) + "%");
+			columns.appendChild(column);
+		}
+
 		Rows rows = new Rows();
 		grid.appendChild(rows);
 
@@ -113,7 +131,7 @@ public class WPAPanel extends Panel implements EventListener<Event>
 		List<WPerformanceIndicator> list = new ArrayList<>();
 		for (int i = 0; i < m_goals.length; i++)
 		{
-			if (row == null || i % 2 == 0)
+			if (row == null || i % cols == 0)
 			{
 				row = new Row();
 				rows.appendChild(row);
