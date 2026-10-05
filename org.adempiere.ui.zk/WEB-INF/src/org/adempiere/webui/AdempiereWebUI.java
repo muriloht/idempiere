@@ -371,6 +371,10 @@ public class AdempiereWebUI extends Window implements EventListener<Event>, IWeb
 		
 		Env.setContext(ctx, Env.UI_CLIENT, "zk");
 		Env.setContext(ctx, Env.THEME, ThemeManager.getTheme());
+		// Marble UI density: comfortable (default) or compact. When compact, set data-density on the
+		// document root so Marble's compact tokens apply app-wide. Comfortable sets nothing (theme default).
+		if ("compact".equalsIgnoreCase(MSysConfig.getValue(MSysConfig.ZK_THEME_DENSITY, "comfortable")))
+			Clients.response(new AuScript("document.documentElement.setAttribute('data-density','compact')"));
 		Env.setContext(ctx, Env.DB_TYPE, DB.getDatabase().getName());
 		StringBuilder localHttpAddr = new StringBuilder(Executions.getCurrent().getScheme());
 		localHttpAddr.append("://").append(Executions.getCurrent().getLocalAddr());

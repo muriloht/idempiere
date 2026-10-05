@@ -303,6 +303,7 @@ public class MSysConfig extends X_AD_SysConfig
 	public static final String ZK_SESSION_SAVE_USER_AGENT = "ZK_SESSION_SAVE_USER_AGENT";
     public static final String ZK_SESSION_TIMEOUT_IN_SECONDS = "ZK_SESSION_TIMEOUT_IN_SECONDS";
     public static final String ZK_THEME = "ZK_THEME";
+    public static final String ZK_THEME_DENSITY = "ZK_THEME_DENSITY";
     public static final String ZK_THEME_USE_FONT_ICON_FOR_IMAGE = "ZK_THEME_USE_FONT_ICON_FOR_IMAGE";
     public static final String ZK_THUMBNAIL_IMAGE_HEIGHT = "ZK_THUMBNAIL_IMAGE_HEIGHT";
     public static final String ZK_THUMBNAIL_IMAGE_WIDTH = "ZK_THUMBNAIL_IMAGE_WIDTH";
