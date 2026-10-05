@@ -87,8 +87,6 @@
 
 	/* Marble (M3) adherence: find-window popup tokens mapped to Marble color roles. */
 	--zk-find-window-popup-background-color: var(--zk-color-surface-container);
-	--zk-find-window-popup-shadow-color: rgba(0,0,0,0.12);
-	--zk-find-window-popup-mobile-shadow-color: rgba(0,0,0,0.15);
 	--zk-find-window-menu-text-color: var(--zk-color-on-surface);
 	--zk-find-window-transparent-color: transparent;
 	--zk-find-window-item-hover-gradient-start-color: var(--zk-color-surface-container-high);
@@ -205,7 +203,7 @@
 	--zk-setup-wizard-progress-border-color: var(--zk-color-outline-variant);
 
 	--zk-toolbar-popup-window-border-color: var(--zk-color-outline-variant);
-	--zk-toolbar-popup-arrow-shadow-color: rgba(0, 0, 0, 0.2);
+	--zk-toolbar-popup-arrow-shadow-color: var(--zk-color-outline);
 	--zk-toolbar-popup-arrow-background-color: var(--zk-color-surface);
 	--zk-toolbar-popup-arrow-side-border-color: transparent;
     

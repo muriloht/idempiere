@@ -37,8 +37,8 @@
     .modern-popup-container {
         min-width: 280px;
         max-width: 90vw;
-	    border-radius: 4px;
-        box-shadow: 0 12px 40px var(--zk-find-window-popup-mobile-shadow-color);
+	    border-radius: var(--zk-shape-corner-extra-small);
+        box-shadow: var(--zk-elevation-5);
     }
 }
 
@@ -46,7 +46,7 @@
     .modern-popup-container {
         min-width: 320px;
         max-width: 95vw;
-	    border-radius: 4px;
+	    border-radius: var(--zk-shape-corner-extra-small);
     }
 }
 

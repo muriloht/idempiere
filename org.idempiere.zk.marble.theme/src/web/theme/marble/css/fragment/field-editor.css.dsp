@@ -311,7 +311,7 @@ span.grid-combobox-editor {
 	cursor: pointer;
 	overflow: auto;
 	border: 1px solid var(--zk-field-editor-html-border-color);
-	border-radius: 4px;
+	border-radius: var(--zk-shape-corner-extra-small);
 }
 .html-field:hover {
 	border-color: var(--zk-field-editor-html-hover-border-color);
