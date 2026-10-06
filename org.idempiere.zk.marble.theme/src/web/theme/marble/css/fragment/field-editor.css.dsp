@@ -135,7 +135,7 @@
 	color: var(--zk-color-on-surface-variant);
 }
 .z-chosenbox-del-btn:hover {
-	background: rgba(0, 0, 0, 0.08) !important;
+	background: color-mix(in srgb, var(--zk-color-on-surface) calc(var(--zk-state-hover-opacity) * 100%), transparent) !important;
 }
 <%-- inline text input --%>
 .z-chosenbox-inp {

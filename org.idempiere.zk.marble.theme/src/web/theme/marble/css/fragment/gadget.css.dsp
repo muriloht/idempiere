@@ -132,7 +132,7 @@
 <%-- embedded report content --%>
 .dashboard-report-iframe {
 	min-height:300px; 
-	border: 1px solid lightgray; 
+	border: 1px solid var(--zk-color-outline-variant); 
 	margin:auto;
 	width: 99%;
 }

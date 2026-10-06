@@ -41,7 +41,7 @@
 
 	--zk-appmenu-link-color: var(--zk-body-text-color);
 	--zk-appmenu-link-hover-background-color: var(--zk-color-surface-container-high, #e8eef7);
-	--zk-appmenu-link-hover-color: rgba(0,0,0,0.9);
+	--zk-appmenu-link-hover-color: var(--zk-color-on-surface);
 	--zk-appmenu-search-toggle-border-color: var(--zk-color-outline-variant);
 	--zk-appmenu-highlight-background-color: var(--zk-color-primary-container);
 
@@ -151,7 +151,7 @@
 	--zk-group-row-background-color: var(--zk-color-surface-container);
 	--zk-group-header-text-color: var(--zk-color-on-surface);
 	--zk-group-inner-background-color: var(--zk-color-surface);
-	--zk-group-list-header-border-color: rgb(207, 207, 207);
+	--zk-group-list-header-border-color: var(--zk-color-outline-variant);
 
 	--zk-help-window-title-color: var(--zk-color-on-surface);
 	--zk-help-window-tabs-color: var(--zk-color-primary);
@@ -167,7 +167,7 @@
 
 	--zk-input-element-attachment-border-color: var(--zk-color-outline-variant);
 	--zk-input-element-attachment-background-color: var(--zk-color-surface-container);
-	--zk-input-element-combobox-disabled-color: rgba(0,0,0,0.7);
+	--zk-input-element-combobox-disabled-color: var(--zk-color-on-surface-variant);
 	--zk-input-element-combobox-text-disabled-background-color: var(--zk-color-surface-container-high);
 	--zk-input-element-focus-background-color: var(--zk-color-surface-container-high);
 	--zk-input-element-readonly-background-color: var(--zk-color-surface-container);
@@ -226,7 +226,7 @@
 	--zk-window-quickform-readonly-color: var(--zk-color-on-surface);
 	--zk-window-quickform-current-row-border-color: var(--zk-color-primary);
 
-	--zk-text-color-light: rgba(0,0,0,0.72);
+	--zk-text-color-light: var(--zk-color-on-surface-variant);
 }
 
 html,body {
