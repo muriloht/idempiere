@@ -32,7 +32,7 @@
 	padding: 10px;
 	color: var(--zk-login-header-text-color) !important;
 	width: 100%;	
-	font-size: 1.6em !important;
+	font-size: var(--zk-typescale-title-large-size) !important;
 }
 
 .login-box-header-logo {

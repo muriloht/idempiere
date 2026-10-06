@@ -158,7 +158,7 @@
 	}
 }
 .desktop-header-username {
-	font-size: 12px;
+	font-size: var(--zk-typescale-body-small-size);
 	font-weight: 600;
 	color: var(--zk-color-on-surface);
 	line-height: 14px;
@@ -220,16 +220,16 @@
 	overflow: hidden;
 }
 .user-menu-name {
-	font-size: 13px;
+	font-size: var(--zk-typescale-body-medium-size);
 	font-weight: 600;
 	color: var(--zk-color-on-surface);
 }
 .user-menu-email {
-	font-size: 11px;
+	font-size: var(--zk-typescale-label-small-size);
 	color: var(--zk-color-on-surface-variant);
 }
 .user-menu-org, .user-menu-warehouse {
-	font-size: 11px;
+	font-size: var(--zk-typescale-label-small-size);
 	color: var(--zk-color-on-surface-variant);
 	margin-top: 2px;
 }
@@ -247,7 +247,7 @@
 	width: 100% !important;
 	padding: 7px 10px !important;
 	border-radius: 6px !important;
-	font-size: 12px !important;
+	font-size: var(--zk-typescale-body-small-size) !important;
 	color: var(--zk-color-on-surface) !important;
 	text-align: left !important;
 	border: none !important;
@@ -314,7 +314,7 @@
 	border-top-right-radius: 8px;
 }
 .notification-popup-title {
-	font-size: 13px;
+	font-size: var(--zk-typescale-body-medium-size);
 	font-weight: 600;
 	color: var(--zk-color-on-surface);
 }
@@ -341,12 +341,12 @@
 	color: var(--zk-color-primary);
 }
 .notification-item-name {
-	font-size: 12px;
+	font-size: var(--zk-typescale-body-small-size);
 	color: var(--zk-color-on-surface);
 	flex-grow: 1;
 }
 .notification-item-badge {
-	font-size: 11px;
+	font-size: var(--zk-typescale-label-small-size);
 	font-weight: 600;
 	padding: 2px 7px;
 	border-radius: 10px;
@@ -361,7 +361,7 @@
 	color: var(--zk-color-on-surface-variant);
 }
 .notification-empty-text {
-	font-size: 12px;
+	font-size: var(--zk-typescale-body-small-size);
 	color: var(--zk-color-on-surface-variant);
 	display: flex;
 	align-items: center;
@@ -535,7 +535,7 @@
 	padding: 2px 3px;
 }
 .window-container-toolbar-btn.tab-list.z-toolbarbutton > .z-toolbarbutton-content {
-	font-size: 14px;
+	font-size: var(--zk-typescale-label-large-size);
 	padding-right: 6px;
 }
 .window-container-toolbar-btn.tab-list.z-toolbarbutton > .z-toolbarbutton-content > i {

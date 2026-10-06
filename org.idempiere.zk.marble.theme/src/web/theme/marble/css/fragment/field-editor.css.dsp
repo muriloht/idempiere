@@ -47,9 +47,10 @@
 .z-button-os.editor-button:hover > i {
   color: var(--zk-field-editor-button-hover-icon-color);
 }
-.editor-button :hover {
-	-webkit-filter: contrast(1.5);
-	filter: contrast(150%);
+<%-- field buttons (lookup/calculator/picker): hover state so they feel clickable, like record-id --%>
+.editor-button:hover {
+	background-color: var(--zk-field-editor-action-hover-background-color);
+	border-radius: var(--zk-shape-corner-extra-small);
 }
 .editor-button img {
 	vertical-align: top;

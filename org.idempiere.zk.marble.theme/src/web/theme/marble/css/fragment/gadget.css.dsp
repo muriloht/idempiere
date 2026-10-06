@@ -307,7 +307,7 @@
 .help-content
 {
 	padding: 5px;
-	font-size: 12px;
+	font-size: var(--zk-typescale-body-small-size);
 	font-weight: normal;
 	line-height: 1.3em;
 }
@@ -316,7 +316,7 @@
 }
 .mobile .help-content
 {
-	font-size: 14px;
+	font-size: var(--zk-typescale-label-large-size);
 }
 
 <%-- User Favorite Dashboard Panel Start --%>

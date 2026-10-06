@@ -287,7 +287,7 @@
 .adtab-form-borderlayout .z-south-collapsed:before { 
 	content: '${u:cleanAmp(u:getMsg(u:getCtx(), "Detail"))}';
 	position: absolute; 
-	font-size: 12px; 
+	font-size: var(--zk-typescale-body-small-size); 
 	font-weight: bold;
 	text-align: center;
 	line-height: 12px;
@@ -342,11 +342,11 @@
 	margin-top: 8px;
 }
 .activity-card .help-content {
-	font-size: 13px;
+	font-size: var(--zk-typescale-body-medium-size);
 	line-height: 1em;
 }
 .mobile .activity-card .help-content {
-	font-size: 16px;
+	font-size: var(--zk-typescale-body-large-size);
 }
 .record-info-dialog .record-info-radiogroup {
 	padding: 4px 4px 8px 4px;

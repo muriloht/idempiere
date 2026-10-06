@@ -2,7 +2,7 @@
 
 <%-- menu item link --%>
 .menu-href {
-	font-size: 11px;
+	font-size: var(--zk-typescale-label-small-size);
 	font-weight: normal;
 	color: var(--zk-appmenu-link-color) !important;
 	text-decoration: none !important;

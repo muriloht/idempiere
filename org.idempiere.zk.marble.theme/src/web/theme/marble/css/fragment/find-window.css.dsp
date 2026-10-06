@@ -62,7 +62,7 @@
 .modern-menu-item {
     padding: 14px 18px;
     margin: 0;
-    font-size: 14px;
+    font-size: var(--zk-typescale-label-large-size);
     color: var(--zk-find-window-menu-text-color);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
@@ -137,7 +137,7 @@
 @media (max-width: 768px) {
     .modern-menu-item {
         padding: 16px 20px;
-        font-size: 16px;
+        font-size: var(--zk-typescale-body-large-size);
         min-height: 48px;
         letter-spacing: 0.2px;
     }
@@ -146,7 +146,7 @@
 @media (max-width: 480px) {
     .modern-menu-item {
         padding: 18px 22px;
-        font-size: 16px;
+        font-size: var(--zk-typescale-body-large-size);
         min-height: 52px;
         font-weight: 400;
     }

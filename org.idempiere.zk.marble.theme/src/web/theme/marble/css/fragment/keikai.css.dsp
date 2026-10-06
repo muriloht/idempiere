@@ -7,7 +7,7 @@
 }
 .zstbtn-real {
     margin-right: 12px;
-    font-size: 12px;
+    font-size: var(--zk-typescale-body-small-size);
 }
 .zschktbtn .z-toolbarbutton-content {
 	justify-content: initial !important;
