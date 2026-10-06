@@ -248,17 +248,35 @@
 	height: 14px;
 	width: 14px;
 }
-<%-- grid selection checkbox: fit Marble's 48px mold touch-target into the narrow column --%>
+<%-- grid selection+indicator columns (22px each): center checkbox/edit-icon so header
+     aligns with rows and nothing clips (Marble's 48px mold touch-target is too wide here) --%>
 .adtab-grid .z-checkbox-mold {
 	margin: 2px;
 }
 .adtab-grid .z-checkbox-mold:before {
 	inset: -6px;
 }
+.adtab-grid .z-column:first-child,
+.adtab-grid .z-column:nth-child(2),
 .adtab-grid .z-cell:first-child,
-.adtab-grid .z-column:first-child {
-	padding-left: 2px;
-	padding-right: 2px;
+.adtab-grid .z-cell:nth-child(2) {
+	padding-left: 0;
+	padding-right: 0;
+	text-align: center;
+}
+.adtab-grid .z-column:first-child .z-column-content,
+.adtab-grid .z-column:nth-child(2) .z-column-content {
+	padding: 0;
+	width: 100%;
+	text-align: center;
+}
+.adtab-grid .z-cell:first-child .z-checkbox,
+.adtab-grid .z-column:first-child .z-checkbox {
+	display: inline-flex;
+	justify-content: center;
+}
+.adtab-grid .z-cell:nth-child(2) [class^="z-icon-"] {
+	margin: 0 auto;
 }
 .adtab-grid > .z-grid-header > table > tbody > tr.z-columns > th.z-column > .z-column-content {
 	text-overflow: ellipsis;	
