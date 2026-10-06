@@ -50,7 +50,7 @@
 <%-- field buttons (lookup/calculator/picker): hover state so they feel clickable, like record-id --%>
 .editor-button:hover {
 	background-color: var(--zk-field-editor-action-hover-background-color);
-	border-radius: var(--zk-shape-corner-extra-small);
+	border-radius: var(--zk-shape-corner-full);
 }
 .editor-button img {
 	vertical-align: top;
