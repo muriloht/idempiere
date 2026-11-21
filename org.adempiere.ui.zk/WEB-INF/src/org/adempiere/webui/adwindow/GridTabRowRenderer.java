@@ -378,7 +378,30 @@ public class GridTabRowRenderer implements RowRenderer<Object[]>, RowRendererExt
 			}
 		}
 		applyFieldStyle(gridField, rowIndex, (HtmlBasedComponent) component);
+		addDocStatusSclass(gridField, value, (HtmlBasedComponent) component);
 		return component;
+	}
+
+	/**
+	 * Tag DocStatus grid cells with a value-based sclass ({@code docstatus-cell docstatus-<code>})
+	 * so themes can render document status as colored pills. No-op for other columns.
+	 * @param gridField field
+	 * @param value raw value (the DocStatus list code, e.g. DR/CO/VO)
+	 * @param component rendered cell component
+	 */
+	private void addDocStatusSclass(GridField gridField, Object value, HtmlBasedComponent component) {
+		if (component == null || gridField == null || value == null)
+			return;
+		if (!"DocStatus".equals(gridField.getColumnName()))
+			return;
+		String code = value.toString().trim();
+		if (code.isEmpty())
+			return;
+		String safe = code.replaceAll("[^A-Za-z0-9_-]", "");
+		if (safe.isEmpty())
+			return;
+		LayoutUtils.addSclass("docstatus-cell", component);
+		LayoutUtils.addSclass("docstatus-" + safe, component);
 	}
 
 	/**
