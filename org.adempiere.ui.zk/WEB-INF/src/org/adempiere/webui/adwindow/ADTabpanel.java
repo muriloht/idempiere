@@ -52,6 +52,7 @@ import org.adempiere.webui.component.Tabpanel;
 import org.adempiere.webui.component.Urlbox;
 import org.adempiere.webui.editor.IZoomableEditor;
 import org.adempiere.webui.editor.WButtonEditor;
+import org.adempiere.webui.editor.IProcessButton;
 import org.adempiere.webui.editor.WEditor;
 import org.adempiere.webui.editor.WEditorPopupMenu;
 import org.adempiere.webui.editor.WImageEditor;
@@ -2166,6 +2167,18 @@ DataStatusListener, IADTabpanel, IdSpace, IFieldEditorContainer
 			}
 		}
 		return buttonList;
+	}
+
+	@Override
+	public IProcessButton getProcessButton(String columnName) {
+		if (columnName == null)
+			return null;
+		for (WButtonEditor editor : toolbarButtonEditors) {
+			GridField gf = editor.getGridField();
+			if (gf != null && columnName.equals(gf.getColumnName()))
+				return editor;
+		}
+		return null;
 	}
 
 	@Override

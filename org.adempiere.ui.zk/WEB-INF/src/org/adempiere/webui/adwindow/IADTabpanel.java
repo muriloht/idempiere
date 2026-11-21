@@ -14,6 +14,8 @@ package org.adempiere.webui.adwindow;
 
 import java.util.List;
 
+import org.adempiere.webui.editor.IProcessButton;
+
 import org.compiere.model.GridTab;
 import org.compiere.util.Evaluatee;
 import org.zkoss.zk.ui.Component;
@@ -241,6 +243,17 @@ public interface IADTabpanel extends Component, Evaluatee {
 	 * @return List of toolbar buttons
 	 */
 	public List<Button> getToolbarButtons();
+
+	/**
+	 * Get the process/button field editor for a column (e.g. "DocAction"), so a
+	 * caller can trigger that document/button process programmatically. Generic
+	 * and reusable; returns null when this panel has no such button.
+	 * @param columnName AD_Column.ColumnName of the button field
+	 * @return the process button, or null
+	 */
+	default IProcessButton getProcessButton(String columnName) {
+		return null;
+	}
 
 	/**
 	 * Is customize grid button enable

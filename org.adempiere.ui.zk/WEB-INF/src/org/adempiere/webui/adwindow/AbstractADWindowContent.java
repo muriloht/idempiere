@@ -3649,6 +3649,68 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	}
 
 	/**
+	 * Run a document action programmatically through the standard flow — the same
+	 * path the DocAction button + {@link org.adempiere.webui.panel.WDocActionPanel}
+	 * use, but without the action-chooser dialog. Lets a toolbar/plugin present its
+	 * own document-action buttons and trigger them directly. Generic and reusable.
+	 * @param docAction the {@code DocumentEngine.ACTION_*} code (e.g. "CO")
+	 * @param callback  optional; receives {@code true} when the process completed OK
+	 */
+	public void processDocAction(final String docAction, final Callback<Boolean> callback)
+	{
+		final IADTabpanel adtabPanel = (adTabbox != null) ? adTabbox.getSelectedTabpanel() : null;
+		if (adtabPanel == null || docAction == null || docAction.isEmpty())
+		{
+			if (callback != null) callback.onCallback(Boolean.FALSE);
+			return;
+		}
+		final GridTab gridTab = adtabPanel.getGridTab();
+		final IProcessButton wButton = adtabPanel.getProcessButton("DocAction");
+		if (gridTab == null || wButton == null)
+		{
+			if (callback != null) callback.onCallback(Boolean.FALSE);
+			return;
+		}
+		final int record_ID = gridTab.getRecord_ID();
+		if (record_ID < 0)
+		{
+			Dialog.error(curWindowNo, "SaveErrorRowNotFound");
+			if (callback != null) callback.onCallback(Boolean.FALSE);
+			return;
+		}
+		// persist pending edits before processing (mirrors save-before-action)
+		if (adtabPanel.needSave(true, true) && !adtabPanel.dataSave(false))
+		{
+			if (callback != null) callback.onCallback(Boolean.FALSE);
+			return;
+		}
+		gridTab.setValue("DocAction", docAction);
+
+		final int table_ID = gridTab.getAD_Table_ID();
+		final Callback<Boolean> postCallback = new Callback<Boolean>() {
+			@Override
+			public void onCallback(Boolean result) {
+				if (Boolean.TRUE.equals(result)) {
+					WindowValidatorEvent ev = new WindowValidatorEvent(adwindow, WindowValidatorEventType.AFTER_DOC_ACTION.getName());
+					WindowValidatorManager.getInstance().fireWindowValidatorEvent(ev, null);
+				}
+				if (callback != null) callback.onCallback(result);
+			}
+		};
+		final Callback<Boolean> preCallback = new Callback<Boolean>() {
+			@Override
+			public void onCallback(Boolean result) {
+				if (Boolean.TRUE.equals(result))
+					executeButtonProcess(wButton, true, table_ID, record_ID, true, postCallback);
+				else if (callback != null)
+					callback.onCallback(Boolean.FALSE);
+			}
+		};
+		WindowValidatorEvent validatorEvent = new WindowValidatorEvent(adwindow, WindowValidatorEventType.BEFORE_DOC_ACTION.getName(), wButton);
+		WindowValidatorManager.getInstance().fireWindowValidatorEvent(validatorEvent, preCallback);
+	}
+
+	/**
 	 *	Execute action for button.<br/>
 	 *  With the exception of zoom to record_id, delegate to {@link #actionButton0(String, IProcessButton)}.
 	 *  @param wButton {@link IProcessButton}
