@@ -461,6 +461,13 @@ public class ADWindowToolbar extends ToolBar implements EventListener<Event>
     {
     	return buttons.get(name);
     }
+
+    /**
+     * Hook for themes to reflect the active record's document status (e.g. a status stepper).
+     * Called from {@code AbstractADWindowContent.dataStatusChanged}. Default no-op.
+     * @param gridTab active grid tab (may be null)
+     */
+    public void onDocStatusChanged(GridTab gridTab) {}
     
     /**
      * Get ToolBarButton by name

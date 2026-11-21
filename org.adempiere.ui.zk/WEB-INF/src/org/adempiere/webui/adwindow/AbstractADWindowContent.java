@@ -1964,6 +1964,7 @@ public abstract class AbstractADWindowContent extends AbstractUIPart implements 
 	        if (adTabbox.getSelectedGridTab() != null && adTabbox.getSelectedGridTab().isQueryActive())
 	            dbInfo = "[ " + dbInfo + " ]";
 	        breadCrumb.setStatusDB(dbInfo, e, adTabbox.getSelectedGridTab());
+	        if (toolbar != null) toolbar.onDocStatusChanged(adTabbox.getSelectedGridTab());
     	}
     	else if (adTabbox.getSelectedDetailADTabpanel() == null)
     	{
