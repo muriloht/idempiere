@@ -1,0 +1,3 @@
+<package name="jsoneditorbox" language="xul/html" depends="zul.inp">
+	<widget name="JsonEditorBox"/>
+</package>
